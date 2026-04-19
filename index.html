@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AR.DEV — Fullstack Developer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- =============================================
+     LOADER
+     ============================================= -->
+<div id="loader">
+  <div class="ld-inner">
+    <div class="ld-logo" data-text="AR.DEV">AR.DEV</div>
+    <div class="ld-role">FULLSTACK DEVELOPER</div>
+    <div class="ld-lines">
+      <div class="ld-ln" style="animation-delay:0s;width:100%"></div>
+      <div class="ld-ln" style="animation-delay:0.12s;width:72%"></div>
+      <div class="ld-ln" style="animation-delay:0.24s;width:88%"></div>
+      <div class="ld-ln" style="animation-delay:0.36s;width:55%"></div>
+    </div>
+    <div class="ld-track"><div class="ld-fill" id="ldFill"></div></div>
+    <div class="ld-info">
+      <span class="ld-pct" id="ldPct">0%</span>
+      <span class="ld-msg" id="ldMsg">INIT...</span>
+    </div>
+  </div>
+</div>
+
+<!-- =============================================
+     CURSOR
+     ============================================= -->
+<div class="cdot" id="dot"></div>
+<div class="cring" id="ring"></div>
+
+<!-- =============================================
+     SCENE LAYERS
+     ============================================= -->
+<canvas id="tc"></canvas>
+<canvas id="bc"></canvas>
+<div class="g-ov"></div>
+<div class="vgn"></div>
+
+<!-- =============================================
+     MAIN CONTENT
+     ============================================= -->
+<div id="wrap">
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo-wrap">
+      <img src="logoAR.png" alt="Logo" class="nav-logo-img">
+    </div>
+    <div class="logo nav-center-title">ASKHABUR_ROYYAN</div>
+    <div class="navl">
+      <a onclick="go('hero')">HOME</a>
+      <a onclick="go('about')">ABOUT</a>
+      <a onclick="go('skills')">STACK</a>
+      <a onclick="go('work')">WORK</a>
+      <a onclick="go('contact')">CONTACT</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+<section id="hero">
+
+  <!-- LEFT: Text content -->
+  <div class="hero-text">
+    <p class="h-tag">// VIBE CODER · LARAVEL · WEB · MOBILE · AI-POWERED</p>
+    <h1 class="h-title">CRAFTING<br>DIGITAL<br>WORLDS</h1>
+    <p class="h-sub">BUILDING ANYTHING WITH AI — WEB, MOBILE & BEYOND</p>
+    <div class="h-stack">
+      <span class="h-pill">LARAVEL</span>
+      <span class="h-pill">CODE IGNITER</span>
+      <span class="h-pill">FLUTTER</span>
+      <span class="h-pill">JAVA</span>
+      <span class="h-pill">VIBE CODER</span>
+    </div>
+    <div class="h-div"></div>
+    <div class="h-cta">
+      <button class="btn-c" onclick="go('work')">VIEW WORK →</button>
+      <button class="btn-o" onclick="go('contact')">CONTACT ME</button>
+    </div>
+  </div>
+
+  <!-- RIGHT: 3D Photo -->
+  <div class="hero-photo-wrap">
+    <div class="photo-card-spinner" id="photoSpinner">
+    <div id="photoCard">
+      <div class="photo-glow"></div>
+      <div class="photo-orbit"></div>
+      <div class="photo-orbit-2"></div>
+      <img class="photo-img" id="heroPhoto" src="Aryn.jpeg" alt="Profile Photo">
+      <div class="photo-border"></div>
+      <div class="photo-overlay"></div>
+      <div class="photo-scan"></div>
+      <div class="hud-corner tl"></div>
+      <div class="hud-corner tr"></div>
+      <div class="hud-corner bl"></div>
+      <div class="hud-corner br"></div>
+      <div class="hud-label top">// IDENTITY CONFIRMED</div>
+      <div class="hud-label bot">STATUS: ONLINE ●</div>
+      <div class="hud-label left">VIBE_CODER</div>
+      <div class="hud-label right">ROY.DEV_v2.0</div>
+    </div>
+    </div><!-- /.photo-card-spinner -->
+  </div>
+
+  <div class="sc-ind"><span>SCROLL</span><div class="sc-line"></div></div>
+</section>
+
+<!-- ABOUT -->
+<section class="sec" id="about">
+  <p class="eyb">// 001 — ABOUT</p>
+  <h2 class="seh">WHO AM I</h2>
+  <div class="ab-grid">
+    <div>
+      <p class="ab-p">Vibe coder kelahiran 2002 yang percaya bahwa <span class="ab-highlight">tidak ada yang tidak bisa dibangun</span> — selama ada AI di tangan. Web, mobile, atau apapun tantangannya, Roy siap eksekusi.</p>
+      <p class="ab-p">Spesialis di <span class="ab-highlight">troubleshooting & problem solving</span> — kalau orang lain stuck, Roy yang dipanggil. Berpengalaman di <span class="ab-highlight">Laravel, CodeIgniter</span>, dan berbagai framework web & mobile.</p>
+      <p class="ab-p">Filosofi sederhana: <span class="ab-highlight">build fast, break nothing, ship everything.</span></p>
+      <div class="ab-status"><div class="ab-dot"></div>AVAILABLE FOR FREELANCE &amp; COLLAB</div>
+      <div class="tech-badges">
+        <div class="tb-row"><span class="tb">LARAVEL</span><span class="tb">CODEIGNITER</span><span class="tb">PHP</span></div>
+        <div class="tb-row"><span class="tb">FLUTTER</span><span class="tb">MOBILE APK</span><span class="tb">REST API</span></div>
+        <div class="tb-row"><span class="tb">AI-POWERED</span><span class="tb">VIBE CODING</span><span class="tb">TROUBLESHOOT</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="stats-grid">
+        <div class="stat"><div class="stat-n" id="sn1">3</div><div class="stat-l">YEARS EXP</div></div>
+        <div class="stat"><div class="stat-n" id="sn2">40+</div><div class="stat-l">PROJECTS</div></div>
+        <div class="stat"><div class="stat-n" id="sn3">15</div><div class="stat-l">CLIENTS</div></div>
+        <div class="stat"><div class="stat-n" id="sn4">999+</div><div class="stat-l">BUGS FIXED</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- SKILLS -->
+  <section class="sec" id="skills">
+    <p class="eyb">// 002 — ARSENAL</p>
+    <h2 class="seh">TECH STACK</h2>
+    <div class="sk-grid" id="skGrid"></div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="sec" id="work">
+    <p class="eyb">// 003 — SELECTED WORK</p>
+    <h2 class="seh">PROJECTS</h2>
+    <div class="pj-grid" id="pjGrid"></div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="sec" id="contact">
+    <p class="eyb">// 004 — CONNECT</p>
+    <h2 class="seh">LET'S BUILD</h2>
+    <div class="ct-box">
+      <p class="ct-sub">OPEN FOR FREELANCE · COLLABORATION · FULL-TIME</p>
+      <p class="ct-email">askhabur_royyan313@email.com</p>
+      <button class="btn-c" onclick="window.location.href='mailto:your@email.com'">KIRIM PESAN →</button>
+      <div class="socials">
+        <span class="soc" onclick="window.open('https://github.com/USERNAME')">GITHUB</span>
+        <span class="soc" onclick="window.open('https://linkedin.com/in/USERNAME')">LINKEDIN</span>
+        <span class="soc" onclick="window.open('https://instagram.com/USERNAME')">INSTAGRAM</span>
+        <span class="soc" onclick="window.open('https://twitter.com/USERNAME')">TWITTER</span>
+      </div>
+    </div>
+  </section>
+
+  <footer><p>© 2026 AR.DEV — FULLSTACK · 3D · CINEMATIC</p></footer>
+
+</div><!-- /#wrap -->
+
+<!-- =============================================
+     SCRIPTS — Three.js dulu, lalu main.js
+     ============================================= -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="main.js"></script>
+
+</body>
+</html>
