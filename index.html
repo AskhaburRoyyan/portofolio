@@ -7,6 +7,9 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <audio id="bgAudio" loop>
+  <source src="AudioWelcome.MP3" type="audio/mpeg">
+</audio>
 
 <!-- =============================================
      LOADER
@@ -28,6 +31,26 @@
     </div>
   </div>
 </div>
+
+<!-- START OVERLAY -->
+<div id="startOverlay">
+  <div class="so-inner">
+    <div class="so-ring so-ring-1"></div>
+    <div class="so-ring so-ring-2"></div>
+    <div class="so-ring so-ring-3"></div>
+    <p class="so-tag">// AR.DEV — FULLSTACK DEVELOPER</p>
+    <h1 class="so-title">AR.DEV</h1>
+    <p class="so-sub">CRAFTING DIGITAL WORLDS</p>
+    <div class="so-divider"></div>
+    <button class="so-btn" id="startBtn">
+      <span class="so-btn-ring"></span>
+      CLICK TO BEGIN
+    </button>
+    
+  </div>
+</div>
+
+
 
 <!-- =============================================
      CURSOR
@@ -92,7 +115,7 @@
       <div class="photo-glow"></div>
       <div class="photo-orbit"></div>
       <div class="photo-orbit-2"></div>
-      <img class="photo-img" id="heroPhoto" src="Aryn.jpeg" alt="Profile Photo">
+      <img class="photo-img" id="heroPhoto" src="Ar.jpeg" alt="Profile Photo">
       <div class="photo-border"></div>
       <div class="photo-overlay"></div>
       <div class="photo-scan"></div>
@@ -120,12 +143,7 @@
       <p class="ab-p">Vibe coder kelahiran 2002 yang percaya bahwa <span class="ab-highlight">tidak ada yang tidak bisa dibangun</span> — selama ada AI di tangan. Web, mobile, atau apapun tantangannya, Roy siap eksekusi.</p>
       <p class="ab-p">Spesialis di <span class="ab-highlight">troubleshooting & problem solving</span> — kalau orang lain stuck, Roy yang dipanggil. Berpengalaman di <span class="ab-highlight">Laravel, CodeIgniter</span>, dan berbagai framework web & mobile.</p>
       <p class="ab-p">Filosofi sederhana: <span class="ab-highlight">build fast, break nothing, ship everything.</span></p>
-      <div class="ab-status"><div class="ab-dot"></div>AVAILABLE FOR FREELANCE &amp; COLLAB</div>
-      <div class="tech-badges">
-        <div class="tb-row"><span class="tb">LARAVEL</span><span class="tb">CODEIGNITER</span><span class="tb">PHP</span></div>
-        <div class="tb-row"><span class="tb">FLUTTER</span><span class="tb">MOBILE APK</span><span class="tb">REST API</span></div>
-        <div class="tb-row"><span class="tb">AI-POWERED</span><span class="tb">VIBE CODING</span><span class="tb">TROUBLESHOOT</span></div>
-      </div>
+      
     </div>
     <div>
       <div class="stats-grid">
@@ -178,6 +196,8 @@
      ============================================= -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="main.js"></script>
-
+<button id="audioBtn" onclick="toggleAudio()" title="Toggle Music">
+  🔊
+</button>
 </body>
 </html>
