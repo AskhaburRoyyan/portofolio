@@ -673,7 +673,7 @@ nav {
     align-items: center;
   }
   .h-cta {
-    justify-content: center;
+    display: none;
   }
   .hero-photo-wrap {
     height: auto;
