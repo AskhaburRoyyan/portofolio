@@ -774,30 +774,9 @@ nav {
   color: #00cfff;
   text-shadow: 0 0 18px rgba(0, 207, 255, 0.35);
 }
-.stat-l {
-  font-size: 0.58rem;
-  letter-spacing: 0.22em;
-  color: rgba(140, 185, 230, 0.32);
-  margin-top: 0.3rem;
-}
-.tech-badges {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  margin-top: 2rem;
-}
-.tb-row {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
-.tb {
-  font-size: 0.58rem;
-  letter-spacing: 0.15em;
-  padding: 0.25rem 0.65rem;
-  border: 1px solid rgba(123, 92, 255, 0.25);
-  color: rgba(180, 160, 255, 0.55);
-}
+
+
+
 
 /* =============================================
    SKILLS
@@ -1220,4 +1199,150 @@ footer p {
   .h-cta {
     flex-direction: column;
   }
+}
+
+#audioBtn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 9999;
+  background: rgba(0, 8, 32, 0.75);
+  border: 1px solid rgba(0, 200, 255, 0.35);
+  color: #00cfff;
+  font-size: 1.3rem;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+#audioBtn:hover {
+  border-color: #00cfff;
+  box-shadow: 0 0 14px rgba(0, 207, 255, 0.45);
+}
+/* =============================================
+   START OVERLAY
+   ============================================= */
+#startOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: #000810;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  transition: opacity 0.8s ease;
+}
+#startOverlay.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+#startOverlay.gone {
+  display: none;
+}
+
+.so-inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  text-align: center;
+  z-index: 2;
+}
+
+/* Rotating rings */
+.so-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 207, 255, 0.15);
+  animation: soRingSpin linear infinite;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.so-ring-1 { width: 320px; height: 320px; animation-duration: 8s;  border-color: rgba(0,207,255,0.12); }
+.so-ring-2 { width: 480px; height: 480px; animation-duration: 14s; border-color: rgba(123,92,255,0.10); animation-direction: reverse; }
+.so-ring-3 { width: 640px; height: 640px; animation-duration: 20s; border-color: rgba(0,207,255,0.06); }
+
+@keyframes soRingSpin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to   { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.so-tag {
+  font-family: 'Courier New', monospace;
+  font-size: 0.72rem;
+  color: #00cfff;
+  letter-spacing: 0.18em;
+  opacity: 0.7;
+  margin: 0;
+}
+
+.so-title {
+  font-size: clamp(3.5rem, 10vw, 7rem);
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  color: #fff;
+  margin: 0;
+  line-height: 1;
+  text-shadow: 0 0 60px rgba(0,207,255,0.35);
+}
+
+.so-sub {
+  font-size: 0.85rem;
+  letter-spacing: 0.3em;
+  color: rgba(255,255,255,0.45);
+  margin: 0;
+}
+
+.so-divider {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #00cfff, transparent);
+  margin: 6px 0;
+}
+
+/* START button */
+.so-btn {
+  position: relative;
+  margin-top: 10px;
+  padding: 16px 52px;
+  background: transparent;
+  border: 1px solid rgba(0,207,255,0.5);
+  color: #00cfff;
+  font-family: 'Courier New', monospace;
+  font-size: 0.95rem;
+  letter-spacing: 0.25em;
+  cursor: pointer;
+  overflow: hidden;
+  transition: background 0.3s, box-shadow 0.3s, color 0.3s;
+  clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
+}
+.so-btn:hover {
+  background: rgba(0,207,255,0.1);
+  box-shadow: 0 0 28px rgba(0,207,255,0.4);
+  color: #fff;
+}
+.so-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(0,207,255,0.15) 50%, transparent 100%);
+  transform: translateX(-100%);
+  animation: soBtnShine 2.8s ease infinite;
+}
+@keyframes soBtnShine {
+  0%   { transform: translateX(-100%); }
+  50%  { transform: translateX(100%); }
+  100% { transform: translateX(100%); }
+}
+
+.so-hint {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.22);
+  margin: 0;
 }
