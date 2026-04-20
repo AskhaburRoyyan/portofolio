@@ -35,19 +35,7 @@ const ldI = setInterval(() => {
 // HERO INTRO SEQUENCE
 // =============================================
 function onLoaderDone() {
-  const spinner = document.getElementById('photoSpinner');
-  spinner.classList.add('do-spin');
-  spinner.addEventListener('animationend', () => {
-    spinner.classList.remove('do-spin');
-    spinner.classList.add('spin-done');
-  }, { once: true });
-
-  const textEls = document.querySelectorAll('.hero-text > *');
-  const delays  = [250, 850, 1550, 2550, 3300, 3950, 4650];
-  textEls.forEach((el, i) => {
-    const ms = delays[i] !== undefined ? delays[i] : 300 + i * 600;
-    setTimeout(() => el.classList.add('revealed'), ms);
-  });
+  showStartOverlay();
 }
 
 // =============================================
@@ -341,3 +329,65 @@ const skillObs = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.25 });
 skillObs.observe(document.getElementById('skills'));
+// =============================================
+// START OVERLAY + AUDIO
+// =============================================
+const bgAudio = document.getElementById('bgAudio');
+bgAudio.volume = 0.5;
+let audioPlaying = false;
+
+function startAudio() {
+  bgAudio.play().then(() => {
+    audioPlaying = true;
+    document.getElementById('audioBtn').textContent = '🔊';
+    sessionStorage.setItem('audioUnlocked', '1');
+  }).catch(() => {});
+}
+
+function toggleAudio() {
+  const btn = document.getElementById('audioBtn');
+  if (audioPlaying) {
+    bgAudio.pause();
+    btn.textContent = '🔇';
+    audioPlaying = false;
+  } else {
+    startAudio();
+  }
+}
+
+const startOverlay = document.getElementById('startOverlay');
+const startBtn     = document.getElementById('startBtn');
+
+// Loader selesai → tampilkan start overlay
+// (panggil ini di dalam onLoaderDone, GANTIKAN baris spinner & textEls)
+function showStartOverlay() {
+  // overlay sudah visible, tinggal sembunyikan loader
+  document.getElementById('loader').classList.add('gone');
+}
+
+startBtn.addEventListener('click', () => {
+  // 1. Mulai audio
+  startAudio();
+
+  // 2. Fade out overlay
+  startOverlay.classList.add('fade-out');
+  setTimeout(() => {
+    startOverlay.classList.add('gone');
+
+    // 3. Baru jalankan intro animasi hero (yang tadinya di onLoaderDone)
+    const spinner = document.getElementById('photoSpinner');
+    spinner.classList.add('do-spin');
+    spinner.addEventListener('animationend', () => {
+      spinner.classList.remove('do-spin');
+      spinner.classList.add('spin-done');
+    }, { once: true });
+
+    const textEls = document.querySelectorAll('.hero-text > *');
+    const delays  = [250, 850, 1550, 2550, 3300, 3950, 4650];
+    textEls.forEach((el, i) => {
+      const ms = delays[i] !== undefined ? delays[i] : 300 + i * 600;
+      setTimeout(() => el.classList.add('revealed'), ms);
+    });
+
+  }, 850);
+});
