@@ -111,6 +111,8 @@ const tools = [
   { cat: "FRONTEND", icon: "◉", nm: "TAILWIND CSS", accent: "cyan" },
   { cat: "TOOLS", icon: "▶", nm: "GIT & GITHUB", accent: "green" },
   { cat: "DEPLOY", icon: "◑", nm: "CPANEL HOSTING", accent: "purple" },
+  { cat: "PLATFORM", icon: "▯", nm: "APLIKASI MOBILE", accent: "pink" },
+  { cat: "PLATFORM", icon: "▭", nm: "APLIKASI DESKTOP", accent: "yellow" },
 ];
 
 const accentColors = {
