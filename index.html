@@ -7,76 +7,106 @@
   <meta name="description" content="Portofolio Askhabur Royyan, web developer Laravel dari Tuban. Membangun sistem informasi untuk yayasan, kampus, dan organisasi.">
   <meta property="og:title" content="Askhabur Royyan — Web Developer Laravel">
   <meta property="og:description" content="Sistem informasi berbasis web untuk organisasi di Tuban.">
-  <meta property="og:image" content="assets/img/profile.jpg">
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <meta property="og:image" content="assets/img/profile.webp">
+  <link rel="icon" href="assets/img/logo.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <a class="skip" href="#proyek">Langsung ke proyek</a>
+  <a class="skip" href="#work">Langsung ke proyek</a>
 
+  <!-- NAV -->
   <header class="nav">
-    <div class="wrap nav-in">
-      <a class="nav-name" href="#top" id="navName"></a>
-      <nav aria-label="Navigasi utama">
-        <a href="#proyek">Proyek</a>
-        <a href="#keahlian">Keahlian</a>
-        <a href="#tentang">Tentang</a>
-        <a href="#kontak">Kontak</a>
+    <div class="nav-in">
+      <a class="nav-brand" href="#hero">
+        <img src="assets/img/logo.png" alt="" class="nav-logo" width="40" height="37">
+        <span id="navName"></span>
+      </a>
+      <nav class="navl" aria-label="Navigasi utama">
+        <a href="#about">Tentang</a>
+        <a href="#skills">Keahlian</a>
+        <a href="#work">Proyek</a>
+        <a href="#contact">Kontak</a>
       </nav>
     </div>
   </header>
 
-  <main id="top">
-    <section class="hero wrap">
-      <p class="hero-role" id="heroRole"></p>
-      <h1 class="hero-name" id="heroName"></h1>
-      <p class="hero-intro" id="heroIntro"></p>
-      <div class="hero-actions">
-        <a class="btn btn-solid" href="#proyek">Lihat proyek</a>
-        <a class="btn btn-line" href="#kontak">Hubungi saya</a>
+  <main>
+    <!-- HERO -->
+    <section id="hero">
+      <div class="hero-text">
+        <p class="h-tag" id="heroRole"></p>
+        <h1 class="h-title" id="heroHeadline"></h1>
+        <p class="h-sub" id="heroIntro"></p>
+        <ul class="h-stack" id="heroTags" aria-label="Teknologi utama"></ul>
+        <div class="h-cta">
+          <a class="btn-c" href="#work">Lihat proyek</a>
+          <a class="btn-o" href="#contact">Hubungi saya</a>
+        </div>
       </div>
-      <p class="hero-loc" id="heroLoc"></p>
-    </section>
-
-    <section class="sec wrap" id="proyek" aria-labelledby="h-proyek">
-      <h2 class="sec-h" id="h-proyek">Proyek</h2>
-      <div id="projectList"></div>
-    </section>
-
-    <section class="sec wrap" id="keahlian" aria-labelledby="h-keahlian">
-      <h2 class="sec-h" id="h-keahlian">Keahlian</h2>
-      <div class="skills" id="skillList"></div>
-    </section>
-
-    <section class="sec wrap" id="tentang" aria-labelledby="h-tentang">
-      <h2 class="sec-h" id="h-tentang">Tentang saya</h2>
-      <div class="about">
-        <img class="about-photo" id="aboutPhoto" alt="" width="400" height="480" loading="lazy">
-        <div class="about-text" id="aboutText"></div>
+      <div class="hero-photo-wrap">
+        <div id="photoCard">
+          <div class="photo-ring"></div>
+          <img class="photo-img" id="heroPhoto" alt="" width="900" height="1214">
+        </div>
       </div>
     </section>
 
-    <section class="sec wrap contact" id="kontak" aria-labelledby="h-kontak">
-      <h2 class="sec-h" id="h-kontak">Kontak</h2>
-      <p class="contact-lead">Terbuka untuk proyek freelance, magang, dan pekerjaan penuh waktu.</p>
-      <div id="contactMain"></div>
-      <ul class="contact-links" id="contactLinks"></ul>
+    <!-- ABOUT -->
+    <section class="sec" id="about" aria-labelledby="h-about">
+      <div class="abt-grid">
+        <div class="abt-visual">
+          <div class="abt-hex"><div class="abt-hex-in"><img id="aboutPhoto" alt="" loading="lazy"></div></div>
+        </div>
+        <div class="abt-right">
+          <p class="eyb">Tentang saya</p>
+          <h2 class="seh" id="h-about"></h2>
+          <div id="aboutText"></div>
+          <p class="abt-quote" id="aboutQuote"></p>
+          <dl class="abt-facts" id="aboutFacts"></dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="sec" id="skills" aria-labelledby="h-skills">
+      <div class="sec-head">
+        <p class="eyb">Keahlian</p>
+        <h2 class="seh" id="h-skills">Teknologi yang saya pakai</h2>
+      </div>
+      <ul class="sk-grid" id="skillList"></ul>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="sec" id="work" aria-labelledby="h-work">
+      <div class="sec-head">
+        <p class="eyb">Proyek</p>
+        <h2 class="seh" id="h-work">Yang sudah saya bangun</h2>
+      </div>
+      <div class="pj-list" id="projectList"></div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="sec" id="contact" aria-labelledby="h-contact">
+      <div class="ct-box">
+        <p class="ct-status"><span class="ct-dot"></span>Terbuka untuk freelance, magang, dan kerja penuh waktu</p>
+        <h2 class="seh" id="h-contact">Mari bekerja sama</h2>
+        <div id="contactMain"></div>
+        <ul class="socials" id="contactLinks"></ul>
+      </div>
     </section>
   </main>
 
-  <footer class="wrap foot">
-    <p id="footText"></p>
-  </footer>
+  <footer><p id="footText"></p></footer>
 
   <dialog class="viewer" id="viewer" aria-label="Pratinjau screenshot">
     <button class="viewer-close" id="viewerClose" aria-label="Tutup">×</button>
     <img id="viewerImg" alt="">
   </dialog>
 
-  <noscript><p class="wrap">Aktifkan JavaScript untuk melihat isi portofolio.</p></noscript>
+  <noscript><p style="text-align:center;padding:2rem">Aktifkan JavaScript untuk melihat isi portofolio.</p></noscript>
   <script src="data.js"></script>
   <script src="main.js"></script>
 </body>
