@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Askhabur Royyan — Web Developer Laravel</title>
   <meta name="description" content="Portofolio Askhabur Royyan, web developer Laravel dari Tuban. Membangun sistem informasi untuk yayasan, kampus, dan organisasi.">
-  <link rel="stylesheet" href="style.css?v=8">
+  <link rel="stylesheet" href="style.css?v=9">
 </head>
 <body>
   <!-- LOADER -->
@@ -138,6 +138,7 @@
       </div>
 
       <div class="sk-grid" id="skGrid"></div>
+      <p class="m-hint">Geser untuk melihat lainnya →</p>
       <div class="sk-grid mini" id="skGridMini"></div>
     </section>
 
@@ -149,6 +150,7 @@
       </div>
 
       <div class="pj-grid" id="pjGrid"></div>
+      <div class="pj-dots" id="pjDots"></div>
     </section>
 
     <!-- CONTACT — orbit berputar + email shimmer -->
@@ -179,6 +181,15 @@
     <footer><p>© 2026 Askhabur Royyan</p></footer>
   </div>
 
-  <script src="main.js?v=8"></script>
+  <!-- MENU BAWAH (khusus HP) -->
+  <div class="m-tab" role="navigation" aria-label="Navigasi">
+    <a onclick="go('hero')" data-sec="hero"><span>⌂</span>Home</a>
+    <a onclick="go('about')" data-sec="about"><span>◉</span>About</a>
+    <a onclick="go('skills')" data-sec="skills"><span>◈</span>Stack</a>
+    <a onclick="go('work')" data-sec="work"><span>▣</span>Work</a>
+    <a onclick="go('contact')" data-sec="contact"><span>✉</span>Contact</a>
+  </div>
+
+  <script src="main.js?v=9"></script>
 </body>
 </html>

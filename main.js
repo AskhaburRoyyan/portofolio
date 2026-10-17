@@ -213,3 +213,31 @@ const statsObs = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.4 });
 statsObs.observe(document.getElementById("about"));
+
+// =============================================
+// MOBILE — menu bawah aktif & titik slider proyek
+// =============================================
+const mTabLinks = document.querySelectorAll(".m-tab a");
+const secObs = new IntersectionObserver((entries) => {
+  entries.forEach((e) => {
+    if (e.isIntersecting) {
+      mTabLinks.forEach((a) => a.classList.toggle("on", a.dataset.sec === e.target.id));
+    }
+  });
+}, { rootMargin: "-45% 0px -50% 0px" });
+["hero", "about", "skills", "work", "contact"].forEach((id) => {
+  const el = document.getElementById(id);
+  if (el) secObs.observe(el);
+});
+
+const pjGridEl = document.getElementById("pjGrid");
+const pjDotsEl = document.getElementById("pjDots");
+pjDotsEl.innerHTML = projects.map((_, i) => `<button aria-label="Proyek ${i + 1}"${i === 0 ? ' class="on"' : ""}></button>`).join("");
+const pjDotBtns = pjDotsEl.querySelectorAll("button");
+pjDotBtns.forEach((b, i) =>
+  b.addEventListener("click", () => pjGridEl.scrollTo({ left: i * pjGridEl.clientWidth, behavior: "smooth" }))
+);
+pjGridEl.addEventListener("scroll", () => {
+  const i = Math.round(pjGridEl.scrollLeft / pjGridEl.clientWidth);
+  pjDotBtns.forEach((b, k) => b.classList.toggle("on", k === i));
+}, { passive: true });
