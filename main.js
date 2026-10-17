@@ -202,10 +202,10 @@ function animCount(el, target, suffix = "") {
 const statsObs = new IntersectionObserver((entries) => {
   entries.forEach((e) => {
     if (e.isIntersecting) {
-      animCount(document.getElementById("sn1"), 3, "+");
-      animCount(document.getElementById("sn2"), 40, "+");
-      animCount(document.getElementById("sn3"), 15, "+");
-      animCount(document.getElementById("sn4"), 10, "+");
+      animCount(document.getElementById("sn1"), projects.length, "");
+      animCount(document.getElementById("sn2"), projects.filter((p) => p.status === "LIVE").length, "");
+      animCount(document.getElementById("sn3"), 2, "");
+      animCount(document.getElementById("sn4"), skills.length + tools.length, "");
       statsObs.disconnect();
     }
   });

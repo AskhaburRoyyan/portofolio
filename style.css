@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
 
 /* =============================================
    TEMA — TERANG · MODERN · ANAK MUDA
@@ -13,6 +13,8 @@
   --lime: #00d68f;
   --card: #ffffff;
   --shadow: 0 10px 30px rgba(28, 33, 64, 0.10);
+  --display: "Space Grotesk", "Plus Jakarta Sans", sans-serif;
+  --body: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -42,7 +44,7 @@ html, body {
   gap: 1.4rem; width: min(340px, 85vw);
 }
 .ld-logo {
-  font-family: "Orbitron", monospace;
+  font-family: var(--display);
   font-size: clamp(2rem, 5vw, 3rem); font-weight: 900;
   letter-spacing: 0.3em; color: var(--ink); position: relative;
 }
@@ -65,11 +67,11 @@ html, body {
 }
 .ld-info { display: flex; justify-content: space-between; width: 100%; }
 .ld-pct {
-  font-family: "Share Tech Mono", monospace;
+  font-family: var(--body);
   font-size: 0.75rem; color: var(--violet); letter-spacing: 0.2em;
 }
 .ld-msg {
-  font-family: "Share Tech Mono", monospace;
+  font-family: var(--body);
   font-size: 0.62rem; color: var(--ink-soft); letter-spacing: 0.15em;
 }
 
@@ -78,7 +80,7 @@ html, body {
    ============================================= */
 #wrap {
   position: relative; z-index: 5;
-  font-family: "Share Tech Mono", monospace;
+  font-family: var(--body);
   color: var(--ink);
 }
 
@@ -112,7 +114,7 @@ nav {
 
 .nav-center-title {
   position: absolute; left: 50%; transform: translateX(-50%);
-  font-family: "Orbitron", monospace;
+  font-family: var(--display);
   font-size: 0.95rem; font-weight: 900; letter-spacing: 0.4em;
   background: linear-gradient(90deg, var(--violet), var(--cyan));
   -webkit-background-clip: text; background-clip: text;
@@ -147,7 +149,7 @@ nav {
   font-weight: 700;
 }
 .h-title {
-  font-family: "Orbitron", monospace;
+  font-family: var(--display);
   font-size: clamp(2rem, 5.5vw, 4.5rem);
   font-weight: 900; line-height: 1.05; letter-spacing: 0.04em;
   background: linear-gradient(120deg, var(--violet) 0%, var(--cyan) 50%, var(--pink) 100%);
@@ -168,7 +170,7 @@ nav {
 .btn-c {
   padding: 0.75rem 2rem; border: none; border-radius: 99px;
   background: linear-gradient(90deg, var(--violet), var(--cyan));
-  color: #fff; font-family: "Share Tech Mono", monospace;
+  color: #fff; font-family: var(--body);
   font-size: 0.7rem; letter-spacing: 0.2em;
   cursor: pointer; transition: transform 0.25s, box-shadow 0.25s;
   box-shadow: 0 8px 22px rgba(123, 92, 255, 0.35);
@@ -180,7 +182,7 @@ nav {
 .btn-o {
   padding: 0.75rem 2rem; border-radius: 99px;
   border: 2px solid rgba(28,33,64,0.15); background: #fff;
-  color: var(--ink); font-family: "Share Tech Mono", monospace;
+  color: var(--ink); font-family: var(--body);
   font-size: 0.7rem; letter-spacing: 0.2em;
   cursor: pointer; transition: all 0.25s;
 }
@@ -265,7 +267,7 @@ nav {
 }
 .eyb { font-size: 1rem; letter-spacing: 0.48em; color: var(--violet); margin-bottom: 0.7rem; font-weight: 700; }
 .seh {
-  font-family: "Orbitron", monospace;
+  font-family: var(--display);
   font-size: clamp(1.7rem, 3.5vw, 2.2rem);
   font-weight: 700; letter-spacing: 0.07em; color: var(--ink);
 }
@@ -335,7 +337,7 @@ nav {
 
 .abt-eyb { font-size: .88rem; letter-spacing: .2em; color: var(--violet); margin-bottom: .3rem; }
 .abt-title {
-  font-family: "Orbitron", monospace; font-weight: 900;
+  font-family: var(--display); font-weight: 900;
   font-size: clamp(2.2rem, 4.4vw, 3.4rem); letter-spacing: .04em;
   color: #0f1a3d; margin-bottom: 1.1rem; line-height: 1.1;
 }
@@ -356,7 +358,7 @@ nav {
 .abt-stat::after { content: ""; position: absolute; top: 7px; right: 7px; width: 10px; height: 10px; border-top: 2px solid rgba(123,92,255,.35); border-right: 2px solid rgba(123,92,255,.35); border-radius: 0 4px 0 0; }
 .abt-stat:hover { transform: translateY(-4px); box-shadow: 0 14px 32px rgba(123,92,255,.2); }
 .abt-stat i { font-style: normal; font-size: 1.3rem; color: var(--violet); }
-.abt-n { font-family: "Orbitron", monospace; font-weight: 900; font-size: 1.6rem; color: #0f1a3d; line-height: 1; }
+.abt-n { font-family: var(--display); font-weight: 900; font-size: 1.6rem; color: #0f1a3d; line-height: 1; }
 .abt-stat small { font-size: .58rem; letter-spacing: .16em; color: var(--ink-soft); }
 
 @media (max-height: 760px) and (min-width: 901px) {
@@ -403,7 +405,7 @@ nav {
 
 .sk-cat { font-size: 0.6rem; letter-spacing: 0.22em; margin-bottom: 0.5rem; font-weight: 700; }
 .sk-ic { font-size: 1.5rem; margin-bottom: 0.7rem; display: block; }
-.sk-nm { font-family: "Orbitron", monospace; font-size: 0.8rem; letter-spacing: 0.12em; color: var(--ink); margin-bottom: 0.4rem; }
+.sk-nm { font-family: var(--display); font-size: 0.8rem; letter-spacing: 0.12em; color: var(--ink); margin-bottom: 0.4rem; }
 .sk-ds { font-size: 0.72rem; color: var(--ink-soft); line-height: 1.7; }
 
 /* Kartu mini */
@@ -430,10 +432,10 @@ nav {
 #work { max-width: none; }
 .pj-grid {
   width: 100%; max-width: 1080px; margin: 0 auto; padding: 0 2rem;
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; align-items: start;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; align-items: stretch;
 }
 .pj {
-  position: relative; overflow: hidden; display: block;
+  position: relative; overflow: hidden; display: flex; flex-direction: column;
   background: var(--card); border-radius: 20px;
   border: 1px solid rgba(28,33,64,0.06);
   box-shadow: var(--shadow);
@@ -468,7 +470,7 @@ nav {
 .pj-img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; }
 .pj-empty { font-size: 0.56rem; letter-spacing: 0.25em; color: var(--ink-soft); }
 
-.pj-in { position: relative; padding: 1.3rem 1.4rem 1.6rem; }
+.pj-in { position: relative; flex: 1; display: flex; flex-direction: column; padding: 1.3rem 1.4rem 1.6rem; }
 .pj-arr {
   position: absolute; top: 1.2rem; right: 1.2rem;
   width: 30px; height: 30px; border-radius: 50%;
@@ -485,9 +487,9 @@ nav {
   background: rgba(0,214,143,0.08); border: 1px solid rgba(0,214,143,0.3);
 }
 .pj-live .ct-dot { width: 6px; height: 6px; }
-.pj-t { font-family: "Orbitron", monospace; font-size: 0.9rem; letter-spacing: 0.08em; line-height: 1.4; color: var(--ink); margin-bottom: 0.65rem; padding-right: 2.2rem; }
+.pj-t { font-family: var(--display); font-size: 0.9rem; letter-spacing: 0.08em; line-height: 1.4; color: var(--ink); margin-bottom: 0.65rem; padding-right: 2.2rem; }
 .pj-d { font-size: 0.72rem; color: var(--ink-soft); line-height: 1.8; }
-.pj-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.1rem; }
+.pj-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: auto; padding-top: 1.1rem; }
 .pj-tag {
   font-size: 0.58rem; letter-spacing: 0.12em;
   padding: 0.25rem 0.7rem; border-radius: 99px;
@@ -579,7 +581,7 @@ nav {
 
 /* Email shimmer — gradien bergerak */
 .ct-email {
-  font-family: "Orbitron", monospace;
+  font-family: var(--display);
   font-size: clamp(0.8rem, 2.5vw, 1.25rem);
   background: linear-gradient(90deg, var(--violet), var(--cyan), var(--pink), var(--violet));
   background-size: 300% 100%;
@@ -706,4 +708,66 @@ footer p { font-size: 0.56rem; letter-spacing: 0.25em; color: var(--ink-soft); }
 /* Layar pendek di mobile: potong bagian paling tidak penting */
 @media (max-height: 700px) and (max-width: 768px) {
   .sec-head { margin-bottom: 0.9rem; }
+}
+
+/* =============================================
+   TIPOGRAFI — lebih mudah dibaca
+   (huruf lebih besar, jarak huruf dikurangi)
+   ============================================= */
+body { font-family: var(--body); }
+#wrap { font-family: var(--body); line-height: 1.6; }
+
+.ld-logo { letter-spacing: 0.12em; }
+.ld-role { font-size: 0.75rem; letter-spacing: 0.2em; }
+
+.nav-center-title { font-size: 1rem; letter-spacing: 0.18em; }
+.navl a { font-size: 0.85rem; font-weight: 600; letter-spacing: 0.12em; }
+
+.h-tag { font-size: 0.95rem; letter-spacing: 0.06em; }
+.h-title { font-weight: 700; letter-spacing: 0; line-height: 1.02; }
+.h-sub { font-size: 1.05rem; letter-spacing: 0; line-height: 1.6; max-width: 46ch; }
+.h-pill { font-size: 0.82rem; font-weight: 600; letter-spacing: 0.04em; }
+.btn-c, .btn-o { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.08em; }
+.sc-ind span { font-size: 0.65rem; letter-spacing: 0.2em; }
+
+.eyb { font-size: 0.9rem; letter-spacing: 0.18em; }
+.seh { font-weight: 700; letter-spacing: 0.01em; }
+
+.abt-label { font-size: 0.68rem; letter-spacing: 0.15em; }
+.abt-badge { font-size: 0.66rem; letter-spacing: 0.06em; font-weight: 600; }
+.abt-mini { font-size: 0.8rem; letter-spacing: 0.12em; font-weight: 700; }
+.abt-chip { font-size: 0.8rem; font-weight: 600; }
+.abt-chip b { font-size: 0.75rem; }
+.abt-soc a { font-size: 0.8rem; font-weight: 700; }
+.abt-eyb { letter-spacing: 0.15em; font-weight: 700; }
+.abt-title { font-weight: 700; letter-spacing: 0.01em; }
+.abt-p { font-size: 1rem; line-height: 1.75; }
+.abt-quote { font-size: 0.95rem; font-weight: 600; }
+.abt-n { font-weight: 700; }
+.abt-stat small { font-size: 0.7rem; letter-spacing: 0.08em; font-weight: 600; }
+
+.sk-cat { font-size: 0.68rem; letter-spacing: 0.12em; }
+.sk-nm { font-size: 1rem; font-weight: 700; letter-spacing: 0.02em; }
+.sk-ds { font-size: 0.85rem; line-height: 1.6; }
+.sk-mini-cat { font-size: 0.66rem; letter-spacing: 0.12em; }
+
+.pj-bar em { font-size: 0.68rem; letter-spacing: 0; }
+.pj-empty { font-size: 0.7rem; letter-spacing: 0.15em; font-weight: 600; }
+.pj-n { font-size: 0.72rem; letter-spacing: 0.15em; }
+.pj-live { font-size: 0.62rem; letter-spacing: 0.1em; font-weight: 700; }
+.pj-t { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.01em; line-height: 1.35; }
+.pj-d { font-size: 0.9rem; line-height: 1.7; }
+.pj-tag { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.06em; }
+
+.ct-status { font-size: 0.75rem; letter-spacing: 0.08em; font-weight: 600; }
+.ct-email { font-weight: 700; font-size: clamp(1rem, 2.6vw, 1.4rem); }
+.soc { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; text-decoration: none; }
+footer p { font-size: 0.8rem; letter-spacing: 0.06em; }
+
+@media (max-width: 768px) {
+  .eyb { font-size: 0.8rem; letter-spacing: 0.14em; }
+  .ct-email { font-size: 0.95rem; }
+}
+@media (max-width: 480px) {
+  .ct-status { font-size: 0.66rem; }
 }
