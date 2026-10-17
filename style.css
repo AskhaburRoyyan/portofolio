@@ -801,3 +801,31 @@ footer p { font-size: 0.8rem; letter-spacing: 0.06em; }
   .pj-in, .pj:nth-child(even) .pj-in { padding: 1.3rem 1.4rem 1.6rem; }
   .pj-t { font-size: 1.1rem; }
 }
+
+/* =============================================
+   PROJECTS — satu panel, baris dipisah garis
+   ============================================= */
+.pj-grid {
+  position: relative; overflow: hidden; gap: 0;
+  max-width: calc(1080px - 4rem); padding: 0;
+  background: var(--card); border-radius: 24px;
+  border: 1px solid rgba(28,33,64,0.06);
+  box-shadow: var(--shadow);
+}
+.pj-grid::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px; z-index: 2;
+  background: linear-gradient(90deg, var(--cyan), var(--violet), var(--pink));
+}
+.pj {
+  background: transparent; border: 0; border-radius: 0; box-shadow: none; overflow: visible;
+  padding: 0.6rem 0;
+}
+.pj + .pj { border-top: 1px dashed rgba(123,92,255,0.22); }
+.pj::before { display: none; }
+.pj:hover { transform: none; box-shadow: none; }
+.pj:hover .pj-shot { box-shadow: 0 14px 34px -14px rgba(123,92,255,0.45); }
+.pj-shot { transition: box-shadow 0.3s; }
+
+@media (max-width: 760px) {
+  .pj-grid { max-width: calc(100% - 2.4rem); margin: 0 1.2rem; }
+}
