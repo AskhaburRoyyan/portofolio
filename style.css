@@ -725,7 +725,7 @@ body { font-family: var(--body); }
 
 .h-tag { font-size: 0.95rem; letter-spacing: 0.06em; }
 .h-title { font-weight: 700; letter-spacing: 0; line-height: 1.02; }
-.h-sub { font-size: 1.05rem; letter-spacing: 0; line-height: 1.6; max-width: 46ch; }
+.h-sub { font-size: 1rem; letter-spacing: 0.1em; line-height: 1.6; }
 .h-pill { font-size: 0.82rem; font-weight: 600; letter-spacing: 0.04em; }
 .btn-c, .btn-o { font-size: 0.85rem; font-weight: 700; letter-spacing: 0.08em; }
 .sc-ind span { font-size: 0.65rem; letter-spacing: 0.2em; }
