@@ -272,120 +272,50 @@ const skillObs = new IntersectionObserver(
 skillObs.observe(document.getElementById("skills"));
 
 // =============================================
-// PROJECTS — proyek nyata + screenshot
-// Foto: taruh di assets/img/projects/ lalu tulis
-// nama filenya di "images". Foto pertama = sampul.
-// Kolom yang dikosongkan ("" / []) tidak ditampilkan.
+// PROJECTS — VARIASI: marquee zigzag + float
 // =============================================
 const projects = [
-  {
-    n: "001",
-    t: "WEBSITE DOMPET SOSIAL AL-USWAH TUBAN",
-    org: "Yayasan sosial",
-    status: "LIVE",
-    d: "Membangun ulang website yayasan dari WordPress menjadi aplikasi Laravel, lengkap dengan panel admin supaya pengurus bisa mengelola seluruh isi website sendiri.",
-    points: [
-      "Panel admin: program, kegiatan, artikel, banner, rekening donasi, legalitas, pengurus",
-      "Halaman buletin: admin upload PDF dan sampul tiap edisi",
-      "Struktur organisasi dengan tab per divisi dan kartu foto",
-      "Optimasi SEO dan deploy ke hosting cPanel",
-    ],
-    tags: ["LARAVEL", "TAILWIND", "MySQL", "BREEZE"],
-    link: "https://dsu.or.id",
-    images: ["assets/img/projects/dsu-1.jpg", "assets/img/projects/dsu-2.jpg", "assets/img/projects/dsu-3.jpg"],
-    accent: "cyan-purple",
-  },
-  {
-    n: "002",
-    t: "SISTEM PEMBAYARAN MAHASISWA",
-    org: "Institut Teknologi dan Bisnis Tuban",
-    status: "",
-    d: "Sistem untuk mengelola pembayaran mahasiswa ITB Tuban.",
-    points: [],
-    tags: [],
-    link: "",
-    images: ["assets/img/projects/pembayaran-1.jpg", "assets/img/projects/pembayaran-2.jpg", "assets/img/projects/pembayaran-3.jpg"],
-    accent: "green-cyan",
-  },
-  {
-    n: "003",
-    t: "SIM UKM",
-    org: "Institut Teknologi dan Bisnis Tuban",
-    status: "",
-    d: "Sistem informasi manajemen untuk Unit Kegiatan Mahasiswa ITB Tuban.",
-    points: [],
-    tags: [],
-    link: "",
-    images: ["assets/img/projects/ukm-1.jpg", "assets/img/projects/ukm-2.jpg", "assets/img/projects/ukm-3.jpg"],
-    accent: "purple-pink",
-  },
+  { n: "001", t: "WEBSITE DSU TUBAN", d: "Website Dompet Sosial Al-Uswah Tuban, dibangun ulang dari WordPress ke Laravel dengan panel admin untuk mengelola program, artikel, buletin, dan pengurus.", tags: ["LARAVEL", "TAILWIND", "MySQL", "BREEZE"], accent: "cyan-purple", link: "https://dsu.or.id" },
+  { n: "002", t: "SISTEM PEMBAYARAN MAHASISWA", d: "Sistem untuk mengelola pembayaran mahasiswa Institut Teknologi dan Bisnis Tuban.", tags: [], accent: "green-cyan", link: "" },
+  { n: "003", t: "SIM UKM ITB TUBAN", d: "Sistem informasi manajemen untuk Unit Kegiatan Mahasiswa Institut Teknologi dan Bisnis Tuban.", tags: [], accent: "purple-pink", link: "" },
 ];
 
-const pjList = document.getElementById("pjList");
-const pjEsc = (s) =>
-  String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-const pjHost = (u) => { try { return new URL(u).host.replace(/^www\./, ""); } catch (e) { return ""; } };
+const pjTrack = document.getElementById("pjTrack");
 
-pjList.innerHTML = projects.map((pj, i) => {
-  const imgs = (pj.images || []).filter(Boolean);
-  const thumbs = imgs.length > 1
-    ? `<div class="pj-thumbs">${imgs.map((src, k) =>
-        `<button class="pj-thumb${k === 0 ? " on" : ""}" data-src="${pjEsc(src)}" aria-label="Screenshot ${k + 1}"><img src="${pjEsc(src)}" alt=""></button>`).join("")}</div>`
-    : "";
-  return `
-  <article class="pj-card${i % 2 ? " flip" : ""}" data-accent="${pj.accent}">
-    <div class="pj-shot">
-      <div class="pj-frame">
-        <div class="pj-bar"><i></i><i></i><i></i><em>${pjEsc(pjHost(pj.link) || pj.t.toLowerCase())}</em></div>
-        ${imgs.length ? `<button class="pj-view" aria-label="Perbesar screenshot"><img class="pj-main" src="${pjEsc(imgs[0])}" alt="Screenshot ${pjEsc(pj.t)}"></button>` : `<div class="pj-empty">SCREENSHOT MENYUSUL</div>`}
-      </div>
-      ${thumbs}
-    </div>
-    <div class="pj-body">
-      <div class="pj-n">//${pj.n}${pj.status ? `<span class="pj-live"><span class="ct-dot"></span>${pjEsc(pj.status)}</span>` : ""}</div>
-      <div class="pj-t">${pjEsc(pj.t)}</div>
-      <div class="pj-org">${pjEsc(pj.org)}</div>
-      <p class="pj-d">${pjEsc(pj.d)}</p>
-      ${pj.points.length ? `<ul class="pj-points">${pj.points.map((p) => `<li>${pjEsc(p)}</li>`).join("")}</ul>` : ""}
-      ${pj.tags.length ? `<div class="pj-tags">${pj.tags.map((t) => `<span class="pj-tag">${pjEsc(t)}</span>`).join("")}</div>` : ""}
-      ${pj.link ? `<a class="btn-c pj-btn" href="${pjEsc(pj.link)}" target="_blank" rel="noopener">KUNJUNGI ${pjEsc(pjHost(pj.link).toUpperCase())} ↗</a>` : ""}
-    </div>
-  </article>`;
-}).join("");
+function buildPjCard(pj) {
+  const card = document.createElement("div");
+  card.className = "pj";
+  card.dataset.accent = pj.accent;
+  if (pj.link) card.onclick = () => window.open(pj.link);
+  card.innerHTML = `
+    <div class="pj-in">
+      <div class="pj-arr">↗</div>
+      <div class="pj-n">//${pj.n}</div>
+      <div class="pj-t">${pj.t}</div>
+      <div class="pj-d">${pj.d}</div>
+      <div class="pj-tags">${pj.tags.map((t) => `<span class="pj-tag">${t}</span>`).join("")}</div>
+    </div>`;
+  return card;
+}
 
-// Screenshot belum ada → tampilkan penanda, thumbnail kosong disembunyikan
-const pjFail = (img, fn) => (img.complete && !img.naturalWidth ? fn() : img.addEventListener("error", fn, { once: true }));
-pjList.querySelectorAll(".pj-main").forEach((img) =>
-  pjFail(img, () => { const v = img.closest(".pj-view"); if (v) v.outerHTML = '<div class="pj-empty">SCREENSHOT MENYUSUL</div>'; })
-);
-pjList.querySelectorAll(".pj-thumb img").forEach((img) =>
-  pjFail(img, () => {
-    const t = img.closest(".pj-thumb"); if (!t) return;
-    const box = t.parentElement; t.remove();
-    if (box.children.length < 2) box.remove();
-  })
-);
-
-// Ganti screenshot & perbesar
-const pjViewer = document.getElementById("pjViewer");
-const pjViewerImg = document.getElementById("pjViewerImg");
-pjList.addEventListener("click", (e) => {
-  const t = e.target.closest(".pj-thumb");
-  if (t) {
-    const shot = t.closest(".pj-shot");
-    const main = shot.querySelector(".pj-main");
-    if (main) main.src = t.dataset.src;
-    shot.querySelectorAll(".pj-thumb").forEach((b) => b.classList.toggle("on", b === t));
-    return;
-  }
-  const v = e.target.closest(".pj-view");
-  if (v && pjViewer.showModal) {
-    pjViewerImg.src = v.querySelector("img").src;
-    pjViewer.showModal();
-  }
+projects.forEach((pj) => pjTrack.appendChild(buildPjCard(pj)));
+projects.forEach((pj) => {
+  const clone = buildPjCard(pj);
+  clone.setAttribute("aria-hidden", "true");
+  pjTrack.appendChild(clone);
 });
-document.getElementById("pjViewerClose").addEventListener("click", () => pjViewer.close());
-pjViewer.addEventListener("click", (e) => { if (e.target === pjViewer) pjViewer.close(); });
+
+setupMarquee({
+  track: pjTrack,
+  carousel: document.getElementById("pjCarousel"),
+  prevBtn: document.getElementById("pjPrev"),
+  nextBtn: document.getElementById("pjNext"),
+  dotsEl: null,
+  cardSel: ".pj",
+  cardW: isMobile ? 290 : 340,
+  speed: 20,
+  reverse: false,
+});
 
 // =============================================
 // COUNTER

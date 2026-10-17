@@ -171,19 +171,20 @@
       </div>
     </section>
 
-    <!-- PROJECTS — proyek nyata dengan screenshot -->
+    <!-- PROJECTS — marquee zigzag, kartu melayang -->
     <section class="sec" id="work">
       <div class="sec-head">
         <p class="eyb">// 003 — SELECTED WORK</p>
         <h2 class="seh">PROJECTS</h2>
       </div>
 
-      <div class="pj-list" id="pjList"></div>
-
-      <dialog class="pj-viewer" id="pjViewer" aria-label="Pratinjau screenshot">
-        <button class="pj-viewer-close" id="pjViewerClose" aria-label="Tutup">×</button>
-        <img id="pjViewerImg" alt="">
-      </dialog>
+      <div class="carousel-wrapper" id="pjCarousel">
+        <button class="car-btn car-prev" id="pjPrev" aria-label="Previous">‹</button>
+        <div class="carousel-viewport pj-vp">
+          <div class="carousel-track" id="pjTrack"></div>
+        </div>
+        <button class="car-btn car-next" id="pjNext" aria-label="Next">›</button>
+      </div>
     </section>
 
     <!-- CONTACT — orbit berputar + email shimmer -->
