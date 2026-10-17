@@ -9,10 +9,6 @@
 <base target="_blank">
 </head>
 <body>
-  <audio id="bgAudio">
-    <source src="AudioWelcome.MP3" type="audio/mpeg">
-  </audio>
-
   <!-- LOADER -->
   <div id="loader">
     <div class="ld-inner">
@@ -23,20 +19,6 @@
         <span class="ld-pct" id="ldPct">0%</span>
         <span class="ld-msg" id="ldMsg">INIT...</span>
       </div>
-    </div>
-  </div>
-
-  <!-- START OVERLAY -->
-  <div id="startOverlay">
-    <div class="so-inner">
-      <div class="so-ring so-ring-1"></div>
-      <div class="so-ring so-ring-2"></div>
-      <div class="so-ring so-ring-3"></div>
-      <p class="so-tag">// AR.DEV — FULLSTACK DEVELOPER</p>
-      <h1 class="so-title">AR.DEV</h1>
-      <p class="so-sub">CRAFTING DIGITAL WORLDS</p>
-      <div class="so-divider"></div>
-      <button class="so-btn" id="startBtn">CLICK TO BEGIN</button>
     </div>
   </div>
 
@@ -148,43 +130,25 @@
       </div>
     </section>
 
-    <!-- SKILLS — 2 baris marquee berlawanan arah -->
+    <!-- SKILLS — kartu statis -->
     <section class="sec" id="skills">
       <div class="sec-head">
         <p class="eyb">// 002 — ARSENAL</p>
         <h2 class="seh">TECH STACK</h2>
       </div>
 
-      <div class="sk-rows" id="skCarousel">
-        <div class="carousel-viewport sk-vp">
-          <div class="carousel-track" id="skTrackA"></div>
-        </div>
-        <div class="carousel-viewport sk-vp">
-          <div class="carousel-track" id="skTrackB"></div>
-        </div>
-      </div>
-
-      <div class="sk-ctrl">
-        <button class="car-btn" id="skPrev" aria-label="Previous">‹</button>
-        <span class="sk-hint">HOVER TO PAUSE</span>
-        <button class="car-btn" id="skNext" aria-label="Next">›</button>
-      </div>
+      <div class="sk-grid" id="skGrid"></div>
+      <div class="sk-grid mini" id="skGridMini"></div>
     </section>
 
-    <!-- PROJECTS — marquee zigzag, kartu melayang -->
+    <!-- PROJECTS — kartu statis dengan screenshot -->
     <section class="sec" id="work">
       <div class="sec-head">
         <p class="eyb">// 003 — SELECTED WORK</p>
         <h2 class="seh">PROJECTS</h2>
       </div>
 
-      <div class="carousel-wrapper" id="pjCarousel">
-        <button class="car-btn car-prev" id="pjPrev" aria-label="Previous">‹</button>
-        <div class="carousel-viewport pj-vp">
-          <div class="carousel-track" id="pjTrack"></div>
-        </div>
-        <button class="car-btn car-next" id="pjNext" aria-label="Next">›</button>
-      </div>
+      <div class="pj-grid" id="pjGrid"></div>
     </section>
 
     <!-- CONTACT — orbit berputar + email shimmer -->
@@ -215,8 +179,6 @@
 
     <footer><p>© 2026 AR.DEV — FULLSTACK · MODERN · YOUTH</p></footer>
   </div>
-
-  <button id="audioBtn" onclick="toggleAudio()" title="Toggle Music">🔊</button>
 
   <script src="main.js"></script>
 </body>
