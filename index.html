@@ -3,111 +3,220 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Askhabur Royyan — Web Developer Laravel</title>
-  <meta name="description" content="Portofolio Askhabur Royyan, web developer Laravel dari Tuban. Membangun sistem informasi untuk yayasan, kampus, dan organisasi.">
-  <meta property="og:title" content="Askhabur Royyan — Web Developer Laravel">
-  <meta property="og:description" content="Sistem informasi berbasis web untuk organisasi di Tuban.">
-  <meta property="og:image" content="assets/img/profile.webp">
-  <link rel="icon" href="assets/img/logo.png" type="image/png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>AR.DEV — Fullstack Developer</title>
   <link rel="stylesheet" href="style.css">
+<base target="_blank">
+<base target="_blank">
 </head>
 <body>
-  <a class="skip" href="#work">Langsung ke proyek</a>
+  <audio id="bgAudio">
+    <source src="AudioWelcome.MP3" type="audio/mpeg">
+  </audio>
 
-  <!-- NAV -->
-  <header class="nav">
-    <div class="nav-in">
-      <a class="nav-brand" href="#hero">
-        <img src="assets/img/logo.png" alt="" class="nav-logo" width="40" height="37">
-        <span id="navName"></span>
-      </a>
-      <nav class="navl" aria-label="Navigasi utama">
-        <a href="#about">Tentang</a>
-        <a href="#skills">Keahlian</a>
-        <a href="#work">Proyek</a>
-        <a href="#contact">Kontak</a>
-      </nav>
+  <!-- LOADER -->
+  <div id="loader">
+    <div class="ld-inner">
+      <div class="ld-logo" data-text="AR.DEV">AR.DEV</div>
+      <div class="ld-role">FULLSTACK DEVELOPER</div>
+      <div class="ld-track"><div class="ld-fill" id="ldFill"></div></div>
+      <div class="ld-info">
+        <span class="ld-pct" id="ldPct">0%</span>
+        <span class="ld-msg" id="ldMsg">INIT...</span>
+      </div>
     </div>
-  </header>
+  </div>
 
-  <main>
+  <!-- START OVERLAY -->
+  <div id="startOverlay">
+    <div class="so-inner">
+      <div class="so-ring so-ring-1"></div>
+      <div class="so-ring so-ring-2"></div>
+      <div class="so-ring so-ring-3"></div>
+      <p class="so-tag">// AR.DEV — FULLSTACK DEVELOPER</p>
+      <h1 class="so-title">AR.DEV</h1>
+      <p class="so-sub">CRAFTING DIGITAL WORLDS</p>
+      <div class="so-divider"></div>
+      <button class="so-btn" id="startBtn">CLICK TO BEGIN</button>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div id="wrap">
+
+    <!-- NAV -->
+    <nav>
+      <div class="nav-logo-wrap">
+        <img src="logoAR.png" alt="Logo" class="nav-logo-img">
+      </div>
+      <div class="logo nav-center-title">ASKHABUR_ROYYAN</div>
+      <div class="navl">
+        <a onclick="go('hero')">HOME</a>
+        <a onclick="go('about')">ABOUT</a>
+        <a onclick="go('skills')">STACK</a>
+        <a onclick="go('work')">WORK</a>
+        <a onclick="go('contact')">CONTACT</a>
+      </div>
+    </nav>
+
     <!-- HERO -->
     <section id="hero">
       <div class="hero-text">
-        <p class="h-tag" id="heroRole"></p>
-        <h1 class="h-title" id="heroHeadline"></h1>
-        <p class="h-sub" id="heroIntro"></p>
-        <ul class="h-stack" id="heroTags" aria-label="Teknologi utama"></ul>
+        <p class="h-tag">// VIBE CODER · LARAVEL · WEB · MOBILE · AI-POWERED</p>
+        <h1 class="h-title">CRAFTING<br>DIGITAL<br>WORLDS</h1>
+        <p class="h-sub">BUILDING ANYTHING WITH AI — WEB, MOBILE &amp; BEYOND</p>
+        <div class="h-stack">
+          <span class="h-pill">LARAVEL</span>
+          <span class="h-pill">CODE IGNITER</span>
+          <span class="h-pill">FLUTTER</span>
+          <span class="h-pill">JAVA</span>
+          <span class="h-pill">VIBE CODER</span>
+        </div>
         <div class="h-cta">
-          <a class="btn-c" href="#work">Lihat proyek</a>
-          <a class="btn-o" href="#contact">Hubungi saya</a>
+          <button class="btn-c" onclick="go('work')">VIEW WORK →</button>
+          <button class="btn-o" onclick="go('contact')">CONTACT ME</button>
         </div>
       </div>
+
       <div class="hero-photo-wrap">
-        <div id="photoCard">
-          <div class="photo-ring"></div>
-          <img class="photo-img" id="heroPhoto" alt="" width="900" height="1214">
+        <div class="photo-card-spinner" id="photoSpinner">
+          <div id="photoCard">
+            <div class="photo-ring"></div>
+            <img class="photo-img" src="Ar.jpeg" alt="Profile Photo">
+          </div>
         </div>
       </div>
+
+      <div class="sc-ind"><span>SCROLL</span><div class="sc-line"></div></div>
     </section>
 
     <!-- ABOUT -->
-    <section class="sec" id="about" aria-labelledby="h-about">
+    <section class="sec" id="about">
       <div class="abt-grid">
-        <div class="abt-visual">
-          <div class="abt-hex"><div class="abt-hex-in"><img id="aboutPhoto" alt="" loading="lazy"></div></div>
+
+        <!-- KIRI: foto + tech stack -->
+        <div class="abt-left">
+          <div class="abt-visual">
+            <span class="abt-label">SOFTWARE<br>DEVELOPER</span>
+            <span class="abt-dots"><i></i><i></i><i></i><i></i></span>
+            <div class="abt-hex">
+              <div class="abt-hex-in"><img src="Roy.jpeg" alt="Askhabur Royyan"></div>
+            </div>
+            <div class="abt-badge">
+              <span class="abt-badge-ic">&lt;/&gt;</span>
+              <span>TURNING IDEAS<br>INTO SOLUTIONS</span>
+              <span class="abt-badge-arr">→</span>
+            </div>
+          </div>
+
+          <p class="abt-mini">// TECH STACK</p>
+          <div class="abt-chips">
+            <span class="abt-chip"><b style="color:#ff5a45">◆</b> Laravel</span>
+            <span class="abt-chip"><b style="color:#ff6b35">◆</b> CodeIgniter</span>
+            <span class="abt-chip"><b style="color:#ffb800">JS</b> JavaScript</span>
+            <span class="abt-chip"><b style="color:#e34f26">5</b> HTML</span>
+            <span class="abt-chip"><b style="color:#2965f1">3</b> CSS</span>
+            <span class="abt-chip"><b style="color:#00758f">◐</b> MySQL</span>
+            <span class="abt-chip"><b style="color:#7b5cff">php</b> PHP</span>
+            <span class="abt-chip"><b style="color:#5b6b8c">▯</b> Mobile</span>
+          </div>
+          <div class="abt-soc">
+            <a href="https://github.com/USERNAME" target="_blank" rel="noopener">GH</a>
+            <a href="https://linkedin.com/in/USERNAME" target="_blank" rel="noopener">IN</a>
+            <a href="https://instagram.com/USERNAME" target="_blank" rel="noopener">IG</a>
+            <a href="mailto:askhabur_royyan313@email.com">✉</a>
+          </div>
         </div>
+
+        <!-- KANAN: teks + statistik -->
         <div class="abt-right">
-          <p class="eyb">Tentang saya</p>
-          <h2 class="seh" id="h-about"></h2>
-          <div id="aboutText"></div>
-          <p class="abt-quote" id="aboutQuote"></p>
-          <dl class="abt-facts" id="aboutFacts"></dl>
+          <p class="abt-eyb">// 001 — ABOUT</p>
+          <h2 class="abt-title">WHO <span>AM I</span></h2>
+
+          <p class="abt-p">Berpengalaman mengembangkan aplikasi menggunakan <b>Laravel</b>, <b>CodeIgniter</b>, <b>JavaScript</b>, serta berbagai teknologi web dan mobile.</p>
+          <p class="abt-p">Saya juga memanfaatkan <b>AI sebagai development partner</b> untuk mempercepat eksplorasi, debugging, dan proses development tanpa mengurangi kontrol terhadap solusi.</p>
+          <p class="abt-quote">Build fast. Solve problems. Ship things.</p>
+
+          <p class="abt-mini">// MY JOURNEY</p>
+          <div class="abt-stats">
+            <div class="abt-stat"><i>📅</i><div><div class="abt-n" id="sn1">0</div><small>YEARS EXPERIENCE</small></div></div>
+            <div class="abt-stat"><i>📁</i><div><div class="abt-n" id="sn2">0</div><small>PROJECTS SHIPPED</small></div></div>
+            <div class="abt-stat"><i>👥</i><div><div class="abt-n" id="sn3">0</div><small>CLIENTS</small></div></div>
+            <div class="abt-stat"><i>&lt;/&gt;</i><div><div class="abt-n" id="sn4">0</div><small>TECHNOLOGIES</small></div></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SKILLS — 2 baris marquee berlawanan arah -->
+    <section class="sec" id="skills">
+      <div class="sec-head">
+        <p class="eyb">// 002 — ARSENAL</p>
+        <h2 class="seh">TECH STACK</h2>
+      </div>
+
+      <div class="sk-rows" id="skCarousel">
+        <div class="carousel-viewport sk-vp">
+          <div class="carousel-track" id="skTrackA"></div>
+        </div>
+        <div class="carousel-viewport sk-vp">
+          <div class="carousel-track" id="skTrackB"></div>
+        </div>
+      </div>
+
+      <div class="sk-ctrl">
+        <button class="car-btn" id="skPrev" aria-label="Previous">‹</button>
+        <span class="sk-hint">HOVER TO PAUSE</span>
+        <button class="car-btn" id="skNext" aria-label="Next">›</button>
+      </div>
+    </section>
+
+    <!-- PROJECTS — proyek nyata dengan screenshot -->
+    <section class="sec" id="work">
+      <div class="sec-head">
+        <p class="eyb">// 003 — SELECTED WORK</p>
+        <h2 class="seh">PROJECTS</h2>
+      </div>
+
+      <div class="pj-list" id="pjList"></div>
+
+      <dialog class="pj-viewer" id="pjViewer" aria-label="Pratinjau screenshot">
+        <button class="pj-viewer-close" id="pjViewerClose" aria-label="Tutup">×</button>
+        <img id="pjViewerImg" alt="">
+      </dialog>
+    </section>
+
+    <!-- CONTACT — orbit berputar + email shimmer -->
+    <section class="sec" id="contact">
+      <div class="sec-head ct-head">
+        <p class="eyb">// 004 — CONNECT</p>
+        <h2 class="seh">LET'S BUILD</h2>
+      </div>
+
+      <div class="ct-stage">
+        <div class="ct-orbit o1"><i>◆</i></div>
+        <div class="ct-orbit o2"><i>●</i></div>
+        <div class="ct-orbit o3"><i>✦</i></div>
+
+        <div class="ct-box">
+          <p class="ct-status"><span class="ct-dot"></span>OPEN FOR FREELANCE · COLLABORATION · FULL-TIME</p>
+          <p class="ct-email">askhabur_royyan313@email.com</p>
+          <button class="btn-c ct-btn" onclick="window.location.href='mailto:askhabur_royyan313@email.com'">KIRIM PESAN →</button>
+          <div class="socials">
+            <span class="soc" onclick="window.open('https://github.com/USERNAME')">GITHUB</span>
+            <span class="soc" onclick="window.open('https://linkedin.com/in/USERNAME')">LINKEDIN</span>
+            <span class="soc" onclick="window.open('https://instagram.com/USERNAME')">INSTAGRAM</span>
+            <span class="soc" onclick="window.open('https://twitter.com/USERNAME')">TWITTER</span>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- SKILLS -->
-    <section class="sec" id="skills" aria-labelledby="h-skills">
-      <div class="sec-head">
-        <p class="eyb">Keahlian</p>
-        <h2 class="seh" id="h-skills">Teknologi yang saya pakai</h2>
-      </div>
-      <ul class="sk-grid" id="skillList"></ul>
-    </section>
+    <footer><p>© 2026 AR.DEV — FULLSTACK · MODERN · YOUTH</p></footer>
+  </div>
 
-    <!-- PROJECTS -->
-    <section class="sec" id="work" aria-labelledby="h-work">
-      <div class="sec-head">
-        <p class="eyb">Proyek</p>
-        <h2 class="seh" id="h-work">Yang sudah saya bangun</h2>
-      </div>
-      <div class="pj-list" id="projectList"></div>
-    </section>
+  <button id="audioBtn" onclick="toggleAudio()" title="Toggle Music">🔊</button>
 
-    <!-- CONTACT -->
-    <section class="sec" id="contact" aria-labelledby="h-contact">
-      <div class="ct-box">
-        <p class="ct-status"><span class="ct-dot"></span>Terbuka untuk freelance, magang, dan kerja penuh waktu</p>
-        <h2 class="seh" id="h-contact">Mari bekerja sama</h2>
-        <div id="contactMain"></div>
-        <ul class="socials" id="contactLinks"></ul>
-      </div>
-    </section>
-  </main>
-
-  <footer><p id="footText"></p></footer>
-
-  <dialog class="viewer" id="viewer" aria-label="Pratinjau screenshot">
-    <button class="viewer-close" id="viewerClose" aria-label="Tutup">×</button>
-    <img id="viewerImg" alt="">
-  </dialog>
-
-  <noscript><p style="text-align:center;padding:2rem">Aktifkan JavaScript untuk melihat isi portofolio.</p></noscript>
-  <script src="data.js"></script>
   <script src="main.js"></script>
 </body>
 </html>

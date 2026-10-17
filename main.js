@@ -1,134 +1,413 @@
-(function () {
-  const D = window.PORTFOLIO;
-  const $ = (id) => document.getElementById(id);
-  const esc = (s) =>
-    String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+// =============================================
+// NAV — Smooth scroll
+// =============================================
+function go(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: "smooth" });
+}
 
-  /* ---------- Hero ---------- */
-  const p = D.profile;
-  $("navName").textContent = p.name;
-  $("heroRole").textContent = `${p.role} · ${p.location}`;
-  $("heroHeadline").textContent = p.headline;
-  $("heroIntro").textContent = p.intro;
-  $("heroTags").innerHTML = p.tags.map((t) => `<li class="h-pill">${esc(t)}</li>`).join("");
-  const heroPhoto = $("heroPhoto");
-  heroPhoto.src = p.photo;
-  heroPhoto.alt = `Foto ${p.name}`;
-  $("footText").textContent = `© ${new Date().getFullYear()} ${p.name}`;
+// =============================================
+// LOADER
+// =============================================
+const msgs = ["INIT SYSTEMS...", "MOUNTING APP...", "READY ↗"];
+let p = 0, mi = 0;
+const fill = document.getElementById("ldFill");
+const pctEl = document.getElementById("ldPct");
+const msgEl = document.getElementById("ldMsg");
 
-  // Foto sedikit miring mengikuti mouse (hanya desktop)
-  const card = $("photoCard");
-  if (!reduceMotion && window.matchMedia("(hover: hover)").matches) {
-    let pending = false, mx = 0, my = 0;
-    document.addEventListener("mousemove", (e) => {
-      mx = e.clientX; my = e.clientY;
-      if (pending) return;
-      pending = true;
-      requestAnimationFrame(() => {
-        pending = false;
-        const r = card.getBoundingClientRect();
-        if (r.bottom < 0 || r.top > innerHeight) return;
-        const dx = (mx - (r.left + r.width / 2)) / (innerWidth / 2);
-        const dy = (my - (r.top + r.height / 2)) / (innerHeight / 2);
-        card.style.transform = `perspective(800px) rotateX(${-dy * 6}deg) rotateY(${dx * 6}deg)`;
-      });
-    }, { passive: true });
+const ldI = setInterval(() => {
+  p += Math.random() * 5 + 3;
+  if (p > 100) p = 100;
+  fill.style.width = p + "%";
+  pctEl.textContent = Math.floor(p) + "%";
+  const idx = Math.floor((p / 100) * msgs.length);
+  if (idx > mi && mi < msgs.length - 1) {
+    mi = idx;
+    msgEl.textContent = msgs[mi];
   }
+  if (p >= 100) {
+    clearInterval(ldI);
+    msgEl.textContent = msgs[msgs.length - 1];
+    setTimeout(() => {
+      document.getElementById("loader").classList.add("gone");
+    }, 500);
+  }
+}, 60);
 
-  /* ---------- Tentang ---------- */
-  $("h-about").textContent = `Halo, saya ${p.name.split(" ").slice(-1)[0]}`;
-  const aboutPhoto = $("aboutPhoto");
-  if (p.photoAbout) { aboutPhoto.src = p.photoAbout; aboutPhoto.alt = `Foto ${p.name}`; }
-  else aboutPhoto.closest(".abt-visual").remove();
-  $("aboutText").innerHTML = p.about.map((t) => `<p class="abt-p">${esc(t)}</p>`).join("");
-  if (p.quote) $("aboutQuote").textContent = p.quote; else $("aboutQuote").remove();
-  $("aboutFacts").innerHTML = (p.facts || [])
-    .map((f) => `<div class="abt-fact"><dt>${esc(f.label)}</dt><dd>${esc(f.value)}</dd></div>`)
-    .join("");
+// =============================================
+// AUDIO
+// =============================================
+const bgAudio = document.getElementById("bgAudio");
+bgAudio.volume = 0.5;
+let audioPlaying = false;
 
-  /* ---------- Keahlian ---------- */
-  $("skillList").innerHTML = D.skills
-    .map((s) => `<li class="sk" data-accent="${esc(s.accent || "violet")}">
-        <span class="sk-cat">${esc(s.group)}</span>
-        <span class="sk-nm">${esc(s.name)}</span>
-        <span class="sk-ds">${esc(s.desc)}</span>
-      </li>`)
-    .join("");
+function startAudio() {
+  bgAudio
+    .play()
+    .then(() => {
+      audioPlaying = true;
+      document.getElementById("audioBtn").textContent = "🔊";
+    })
+    .catch(() => {});
+}
 
-  /* ---------- Proyek ---------- */
-  const statusText = { live: "Sudah dipakai", dev: "Dalam pengembangan" };
-  const host = (url) => { try { return new URL(url).host.replace(/^www\./, ""); } catch { return ""; } };
+function toggleAudio() {
+  const btn = document.getElementById("audioBtn");
+  if (audioPlaying) {
+    bgAudio.pause();
+    btn.textContent = "🔇";
+    audioPlaying = false;
+  } else {
+    startAudio();
+  }
+}
 
-  $("projectList").innerHTML = D.projects.map((pr, i) => {
-    const imgs = (pr.images || []).filter(Boolean);
-    const bar = host(pr.link) || pr.title.toLowerCase();
-    const thumbs = imgs.length > 1
-      ? `<div class="thumbs" role="tablist" aria-label="Screenshot ${esc(pr.title)}">${imgs.map((src, k) =>
-          `<button class="thumb${k === 0 ? " is-on" : ""}" data-src="${esc(src)}" role="tab" aria-selected="${k === 0}" aria-label="Screenshot ${k + 1}"><img src="${esc(src)}" alt="" loading="lazy"></button>`).join("")}</div>`
-      : "";
-    const links = [
-      pr.link && `<a href="${esc(pr.link)}" target="_blank" rel="noopener">Kunjungi ${esc(host(pr.link))}</a>`,
-      pr.repo && `<a href="${esc(pr.repo)}" target="_blank" rel="noopener">Lihat kode</a>`,
-    ].filter(Boolean).join("");
-    return `<article class="pj${i % 2 ? " flip" : ""}" data-accent="${esc(pr.accent || "violet")}">
-      <div class="pj-shot">
-        <div class="frame">
-          <div class="frame-bar"><span></span><span></span><span></span><em>${esc(bar)}</em></div>
-          ${imgs.length ? `<button class="frame-view" aria-label="Perbesar screenshot ${esc(pr.title)}"><img class="main-img" src="${esc(imgs[0])}" alt="Screenshot ${esc(pr.title)}" loading="lazy"></button>` : ""}
-        </div>
-        ${thumbs}
+// =============================================
+// START OVERLAY + HERO INTRO
+// =============================================
+const startOverlay = document.getElementById("startOverlay");
+const startBtn = document.getElementById("startBtn");
+
+function playHeroIntro() {
+  const spinner = document.getElementById("photoSpinner");
+  spinner.classList.add("do-spin");
+  spinner.addEventListener(
+    "animationend",
+    () => {
+      spinner.classList.remove("do-spin");
+      spinner.classList.add("spin-done");
+    },
+    { once: true }
+  );
+
+  const textEls = document.querySelectorAll(".hero-text > *");
+  const delays = [250, 850, 1550, 2550, 3300, 3950, 4650];
+  textEls.forEach((el, i) => {
+    const ms = delays[i] !== undefined ? delays[i] : 300 + i * 600;
+    setTimeout(() => el.classList.add("revealed"), ms);
+  });
+}
+
+startBtn.addEventListener("click", () => {
+  startAudio();
+  startOverlay.classList.add("fade-out");
+  setTimeout(() => {
+    startOverlay.classList.add("gone");
+    playHeroIntro();
+  }, 850);
+});
+
+// =============================================
+// PHOTO — tilt ringan mengikuti mouse
+// =============================================
+const photoCard = document.getElementById("photoCard");
+let tiltPending = false, lastMX = 0, lastMY = 0;
+
+document.addEventListener(
+  "mousemove",
+  (e) => {
+    lastMX = e.clientX;
+    lastMY = e.clientY;
+    if (!tiltPending) {
+      tiltPending = true;
+      requestAnimationFrame(applyTilt);
+    }
+  },
+  { passive: true }
+);
+
+function applyTilt() {
+  tiltPending = false;
+  const r = photoCard.getBoundingClientRect();
+  if (r.bottom < 0 || r.top > innerHeight) return;
+  const dx = (lastMX - (r.left + r.width / 2)) / (innerWidth / 2);
+  const dy = (lastMY - (r.top + r.height / 2)) / (innerHeight / 2);
+  photoCard.style.transform =
+    `perspective(800px) rotateX(${-dy * 8}deg) rotateY(${dx * 8}deg)`;
+}
+
+document.getElementById("hero").addEventListener("mouseleave", () => {
+  photoCard.style.transition = "transform 0.6s ease";
+  photoCard.style.transform = "perspective(800px)";
+  setTimeout(() => (photoCard.style.transition = "transform 0.08s ease-out"), 650);
+});
+
+// =============================================
+// MARQUEE HELPER (dipakai Skills & Projects)
+// =============================================
+function setupMarquee({ track, carousel, prevBtn, nextBtn, dotsEl, cardSel, cardW, speed, reverse }) {
+  const gap = 1.2 * 16;
+  const count = track.querySelectorAll(cardSel).length / 2; // asli + clone
+  const totalW = count * (cardW + gap);
+
+  track.querySelectorAll(cardSel).forEach((c) => {
+    c.style.width = cardW + "px";
+    c.style.minWidth = cardW + "px";
+  });
+  track.style.setProperty("--marquee-dist", `-${totalW}px`);
+  if (reverse) track.style.animationDirection = "reverse";
+  track.style.animationDuration = totalW / speed + "s";
+  track.classList.add("marquee-mode");
+
+  carousel.addEventListener("mouseenter", () => track.classList.add("paused"));
+  carousel.addEventListener("mouseleave", () => track.classList.remove("paused"));
+
+  // Geser manual: majukan/mundurkan currentTime animasi
+  function shift(pxDir) {
+    const anim = track.getAnimations()[0];
+    if (!anim) return;
+    const dur = anim.effect.getComputedTiming().duration;
+    const deltaMs = ((cardW + gap) / speed) * 1000 * pxDir * (reverse ? -1 : 1);
+    let t = (anim.currentTime || 0) + deltaMs;
+    t = ((t % dur) + dur) % dur;
+    anim.currentTime = t;
+  }
+  if (prevBtn) prevBtn.addEventListener("click", () => shift(-1));
+  if (nextBtn) nextBtn.addEventListener("click", () => shift(1));
+
+  if (dotsEl) dotsEl.style.display = "none";
+}
+
+// =============================================
+// SKILLS — VARIASI: 2 baris berlawanan arah
+// Baris A: kartu besar (5) · Baris B: kartu mini (4)
+// =============================================
+const skills = [
+  { cat: "FRONTEND", icon: "⬡", nm: "REACT + R3F", ds: "3D web interfaces & component architecture", lv: 94, accent: "cyan" },
+  { cat: "3D / WEBGL", icon: "◉", nm: "THREE.JS", ds: "Real-time 3D scenes, shaders, particle systems", lv: 90, accent: "purple" },
+  { cat: "ANIMATION", icon: "◈", nm: "GSAP + SCROLL", ds: "Cinematic scroll-driven animations", lv: 92, accent: "green" },
+  { cat: "FRONTEND", icon: "◆", nm: "VUE 3 + NUXT", ds: "Reactive UI & server-side rendering", lv: 88, accent: "orange" },
+  { cat: "BACKEND", icon: "▣", nm: "LARAVEL", ds: "REST APIs, MVC, authentication & eloquent ORM", lv: 91, accent: "pink" },
+  { cat: "LANGUAGE", icon: "◎", nm: "TYPESCRIPT", ds: "Type-safe fullstack development", lv: 87, accent: "yellow" },
+  { cat: "MOBILE", icon: "◐", nm: "FLUTTER", ds: "Cross-platform mobile apps for iOS & Android", lv: 82, accent: "cyan" },
+  { cat: "BACKEND", icon: "▶", nm: "NODE.JS", ds: "REST APIs, WebSocket, real-time systems", lv: 85, accent: "green" },
+  { cat: "LANGUAGE", icon: "◑", nm: "JAVA", ds: "OOP, Android & backend service development", lv: 80, accent: "orange" },
+];
+
+const accentColors = {
+  cyan: "#00cfff", purple: "#7b5cff", green: "#00d68f",
+  orange: "#ff6b35", pink: "#ff4d9d", yellow: "#ffb800",
+};
+
+const rowA = skills.slice(0, 5);
+const rowB = skills.slice(5);
+
+const skTrackA = document.getElementById("skTrackA");
+const skTrackB = document.getElementById("skTrackB");
+
+function buildSkCard(s, mini) {
+  const col = accentColors[s.accent];
+  const card = document.createElement("div");
+  card.className = mini ? "sk mini" : "sk";
+  card.dataset.accent = s.accent;
+  if (mini) {
+    card.innerHTML = `
+      <div class="sk-ic" style="color:${col}">${s.icon}</div>
+      <div class="sk-mini-tx">
+        <div class="sk-nm">${s.nm}</div>
+        <div class="sk-mini-cat" style="color:${col}">${s.cat}</div>
       </div>
-      <div class="pj-in">
-        <p class="pj-org">${esc(pr.org)}${pr.status && statusText[pr.status] ? `<span class="pj-status s-${pr.status}">${statusText[pr.status]}</span>` : ""}</p>
-        <h3 class="pj-t">${esc(pr.title)}</h3>
-        <p class="pj-d">${esc(pr.summary)}</p>
-        ${pr.points && pr.points.length ? `<ul class="pj-points">${pr.points.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>` : ""}
-        ${pr.stack && pr.stack.length ? `<ul class="pj-tags" aria-label="Teknologi">${pr.stack.map((t) => `<li class="pj-tag">${esc(t)}</li>`).join("")}</ul>` : ""}
-        ${links ? `<div class="pj-links">${links}</div>` : ""}
-      </div>
-    </article>`;
-  }).join("");
+      <div class="sk-mini-lv" style="color:${col}">${s.lv}<span>%</span></div>`;
+  } else {
+    card.innerHTML = `
+      <div class="sk-cat" style="color:${col}">${s.cat}</div>
+      <div class="sk-ic" style="color:${col}">${s.icon}</div>
+      <div class="sk-nm">${s.nm}</div>
+      <div class="sk-ds">${s.ds}</div>
+      <div class="sk-tr"><div class="sk-fl" data-w="${s.lv}" style="background:linear-gradient(90deg,${col},${col}88)"></div></div>`;
+  }
+  return card;
+}
 
-  // Screenshot yang belum ada → kotak penanda; thumbnail kosong disembunyikan
-  const missing = '<div class="missing">Screenshot belum ditambahkan</div>';
-  const onFail = (img, fn) => (img.complete && !img.naturalWidth ? fn() : img.addEventListener("error", fn, { once: true }));
-  document.querySelectorAll(".frame").forEach((f) => { if (!f.querySelector(".frame-view")) f.insertAdjacentHTML("beforeend", missing); });
-  document.querySelectorAll(".main-img").forEach((img) => onFail(img, () => { const v = img.closest(".frame-view"); if (v) v.outerHTML = missing; }));
-  document.querySelectorAll(".thumb img").forEach((img) => onFail(img, () => {
-    const t = img.closest(".thumb"); if (!t) return;
+function fillTrack(track, list, mini) {
+  list.forEach((s) => track.appendChild(buildSkCard(s, mini)));
+  list.forEach((s) => {
+    const clone = buildSkCard(s, mini);
+    clone.setAttribute("aria-hidden", "true");
+    track.appendChild(clone);
+  });
+}
+
+fillTrack(skTrackA, rowA, false);
+fillTrack(skTrackB, rowB, true);
+
+const isMobile = window.innerWidth < 640;
+
+setupMarquee({
+  track: skTrackA,
+  carousel: document.getElementById("skCarousel"),
+  prevBtn: document.getElementById("skPrev"),
+  nextBtn: document.getElementById("skNext"),
+  dotsEl: null,
+  cardSel: ".sk",
+  cardW: isMobile ? 215 : 250,
+  speed: 30,
+  reverse: false,
+});
+
+setupMarquee({
+  track: skTrackB,
+  carousel: document.getElementById("skCarousel"),
+  prevBtn: null, // listener sudah dipasang di baris A
+  nextBtn: null,
+  dotsEl: null,
+  cardSel: ".sk",
+  cardW: isMobile ? 180 : 215,
+  speed: 24,
+  reverse: true,
+});
+
+let skBarsAnimated = false;
+const skillObs = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting && !skBarsAnimated) {
+        skBarsAnimated = true;
+        document.querySelectorAll(".sk-fl").forEach((el) => (el.style.width = el.dataset.w + "%"));
+      }
+    });
+  },
+  { threshold: 0.25 }
+);
+skillObs.observe(document.getElementById("skills"));
+
+// =============================================
+// PROJECTS — proyek nyata + screenshot
+// Foto: taruh di assets/img/projects/ lalu tulis
+// nama filenya di "images". Foto pertama = sampul.
+// Kolom yang dikosongkan ("" / []) tidak ditampilkan.
+// =============================================
+const projects = [
+  {
+    n: "001",
+    t: "WEBSITE DOMPET SOSIAL AL-USWAH TUBAN",
+    org: "Yayasan sosial",
+    status: "LIVE",
+    d: "Membangun ulang website yayasan dari WordPress menjadi aplikasi Laravel, lengkap dengan panel admin supaya pengurus bisa mengelola seluruh isi website sendiri.",
+    points: [
+      "Panel admin: program, kegiatan, artikel, banner, rekening donasi, legalitas, pengurus",
+      "Halaman buletin: admin upload PDF dan sampul tiap edisi",
+      "Struktur organisasi dengan tab per divisi dan kartu foto",
+      "Optimasi SEO dan deploy ke hosting cPanel",
+    ],
+    tags: ["LARAVEL", "TAILWIND", "MySQL", "BREEZE"],
+    link: "https://dsu.or.id",
+    images: ["assets/img/projects/dsu-1.jpg", "assets/img/projects/dsu-2.jpg", "assets/img/projects/dsu-3.jpg"],
+    accent: "cyan-purple",
+  },
+  {
+    n: "002",
+    t: "SISTEM PEMBAYARAN MAHASISWA",
+    org: "Institut Teknologi dan Bisnis Tuban",
+    status: "",
+    d: "Sistem untuk mengelola pembayaran mahasiswa ITB Tuban.",
+    points: [],
+    tags: [],
+    link: "",
+    images: ["assets/img/projects/pembayaran-1.jpg", "assets/img/projects/pembayaran-2.jpg", "assets/img/projects/pembayaran-3.jpg"],
+    accent: "green-cyan",
+  },
+  {
+    n: "003",
+    t: "SIM UKM",
+    org: "Institut Teknologi dan Bisnis Tuban",
+    status: "",
+    d: "Sistem informasi manajemen untuk Unit Kegiatan Mahasiswa ITB Tuban.",
+    points: [],
+    tags: [],
+    link: "",
+    images: ["assets/img/projects/ukm-1.jpg", "assets/img/projects/ukm-2.jpg", "assets/img/projects/ukm-3.jpg"],
+    accent: "purple-pink",
+  },
+];
+
+const pjList = document.getElementById("pjList");
+const pjEsc = (s) =>
+  String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const pjHost = (u) => { try { return new URL(u).host.replace(/^www\./, ""); } catch (e) { return ""; } };
+
+pjList.innerHTML = projects.map((pj, i) => {
+  const imgs = (pj.images || []).filter(Boolean);
+  const thumbs = imgs.length > 1
+    ? `<div class="pj-thumbs">${imgs.map((src, k) =>
+        `<button class="pj-thumb${k === 0 ? " on" : ""}" data-src="${pjEsc(src)}" aria-label="Screenshot ${k + 1}"><img src="${pjEsc(src)}" alt=""></button>`).join("")}</div>`
+    : "";
+  return `
+  <article class="pj-card${i % 2 ? " flip" : ""}" data-accent="${pj.accent}">
+    <div class="pj-shot">
+      <div class="pj-frame">
+        <div class="pj-bar"><i></i><i></i><i></i><em>${pjEsc(pjHost(pj.link) || pj.t.toLowerCase())}</em></div>
+        ${imgs.length ? `<button class="pj-view" aria-label="Perbesar screenshot"><img class="pj-main" src="${pjEsc(imgs[0])}" alt="Screenshot ${pjEsc(pj.t)}"></button>` : `<div class="pj-empty">SCREENSHOT MENYUSUL</div>`}
+      </div>
+      ${thumbs}
+    </div>
+    <div class="pj-body">
+      <div class="pj-n">//${pj.n}${pj.status ? `<span class="pj-live"><span class="ct-dot"></span>${pjEsc(pj.status)}</span>` : ""}</div>
+      <div class="pj-t">${pjEsc(pj.t)}</div>
+      <div class="pj-org">${pjEsc(pj.org)}</div>
+      <p class="pj-d">${pjEsc(pj.d)}</p>
+      ${pj.points.length ? `<ul class="pj-points">${pj.points.map((p) => `<li>${pjEsc(p)}</li>`).join("")}</ul>` : ""}
+      ${pj.tags.length ? `<div class="pj-tags">${pj.tags.map((t) => `<span class="pj-tag">${pjEsc(t)}</span>`).join("")}</div>` : ""}
+      ${pj.link ? `<a class="btn-c pj-btn" href="${pjEsc(pj.link)}" target="_blank" rel="noopener">KUNJUNGI ${pjEsc(pjHost(pj.link).toUpperCase())} ↗</a>` : ""}
+    </div>
+  </article>`;
+}).join("");
+
+// Screenshot belum ada → tampilkan penanda, thumbnail kosong disembunyikan
+const pjFail = (img, fn) => (img.complete && !img.naturalWidth ? fn() : img.addEventListener("error", fn, { once: true }));
+pjList.querySelectorAll(".pj-main").forEach((img) =>
+  pjFail(img, () => { const v = img.closest(".pj-view"); if (v) v.outerHTML = '<div class="pj-empty">SCREENSHOT MENYUSUL</div>'; })
+);
+pjList.querySelectorAll(".pj-thumb img").forEach((img) =>
+  pjFail(img, () => {
+    const t = img.closest(".pj-thumb"); if (!t) return;
     const box = t.parentElement; t.remove();
     if (box.children.length < 2) box.remove();
-  }));
+  })
+);
 
-  document.addEventListener("click", (e) => {
-    const t = e.target.closest(".thumb");
-    if (t) {
-      const shot = t.closest(".pj-shot"), main = shot.querySelector(".main-img");
-      if (main) main.src = t.dataset.src;
-      shot.querySelectorAll(".thumb").forEach((b) => { b.classList.toggle("is-on", b === t); b.setAttribute("aria-selected", b === t); });
-      return;
-    }
-    const v = e.target.closest(".frame-view");
-    if (v && viewer.showModal) {
-      const img = v.querySelector("img");
-      vImg.src = img.src; vImg.alt = img.alt;
-      viewer.showModal();
+// Ganti screenshot & perbesar
+const pjViewer = document.getElementById("pjViewer");
+const pjViewerImg = document.getElementById("pjViewerImg");
+pjList.addEventListener("click", (e) => {
+  const t = e.target.closest(".pj-thumb");
+  if (t) {
+    const shot = t.closest(".pj-shot");
+    const main = shot.querySelector(".pj-main");
+    if (main) main.src = t.dataset.src;
+    shot.querySelectorAll(".pj-thumb").forEach((b) => b.classList.toggle("on", b === t));
+    return;
+  }
+  const v = e.target.closest(".pj-view");
+  if (v && pjViewer.showModal) {
+    pjViewerImg.src = v.querySelector("img").src;
+    pjViewer.showModal();
+  }
+});
+document.getElementById("pjViewerClose").addEventListener("click", () => pjViewer.close());
+pjViewer.addEventListener("click", (e) => { if (e.target === pjViewer) pjViewer.close(); });
+
+// =============================================
+// COUNTER
+// =============================================
+function animCount(el, target, suffix = "") {
+  let v = 0;
+  const step = target / 50;
+  const iv = setInterval(() => {
+    v = Math.min(v + step, target);
+    el.textContent = Math.floor(v) + suffix;
+    if (v >= target) clearInterval(iv);
+  }, 28);
+}
+const statsObs = new IntersectionObserver((entries) => {
+  entries.forEach((e) => {
+    if (e.isIntersecting) {
+      animCount(document.getElementById("sn1"), 3, "+");
+      animCount(document.getElementById("sn2"), 40, "+");
+      animCount(document.getElementById("sn3"), 15, "+");
+      animCount(document.getElementById("sn4"), 10, "+");
+      statsObs.disconnect();
     }
   });
-  const viewer = $("viewer"), vImg = $("viewerImg");
-  $("viewerClose").addEventListener("click", () => viewer.close());
-  viewer.addEventListener("click", (e) => { if (e.target === viewer) viewer.close(); });
-
-  /* ---------- Kontak ---------- */
-  const c = D.contact;
-  $("contactMain").innerHTML = c.email
-    ? `<a class="ct-email" href="mailto:${esc(c.email)}">${esc(c.email)}</a><br><a class="btn-c ct-btn" href="mailto:${esc(c.email)}">Kirim email</a>`
-    : c.whatsapp ? `<a class="btn-c ct-btn" href="https://wa.me/${esc(c.whatsapp)}" target="_blank" rel="noopener">Chat WhatsApp</a>` : "";
-  $("contactLinks").innerHTML = [
-    c.whatsapp && c.email && ["WhatsApp", `https://wa.me/${c.whatsapp}`],
-    c.github && ["GitHub", c.github],
-    c.linkedin && ["LinkedIn", c.linkedin],
-    c.instagram && ["Instagram", c.instagram],
-  ].filter(Boolean).map(([n, u]) => `<li><a class="soc" href="${esc(u)}" target="_blank" rel="noopener">${n}</a></li>`).join("");
-})();
+}, { threshold: 0.4 });
+statsObs.observe(document.getElementById("about"));
