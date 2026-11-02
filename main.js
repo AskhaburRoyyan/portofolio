@@ -144,50 +144,89 @@ document.getElementById("skGridMini").innerHTML = tools.map((s) => {
 }).join("");
 
 // =============================================
-// PROJECTS — kartu statis dengan screenshot
-// img: taruh foto di folder "projects/" lalu tulis
-// namanya, misal "projects/dsu.jpg". Kosong = placeholder.
+// PROJECTS — screenshot bergantian otomatis
+// imgs: taruh foto di folder "projects/" lalu tulis
+// namanya, misal "projects/latarkopi-1.jpg".
+// status: "LIVE" | "DEV" | ""  (DEV = dalam pengembangan)
 // =============================================
 const projects = [
   {
-    n: "001", t: "WEBSITE DSU TUBAN", status: "LIVE",
-    d: "Website Dompet Sosial Al-Uswah Tuban, dibangun ulang dari WordPress ke Laravel dengan panel admin untuk mengelola program, artikel, buletin, dan pengurus.",
-    tags: ["LARAVEL", "TAILWIND", "MySQL", "BREEZE"],
-    accent: "cyan-purple", link: "https://dsu.or.id", img: "projects/dsu.jpg",
+    n: "001", t: "WEBSITE & PORTAL BEM ITB TUBAN", status: "LIVE", org: "BEM ITB Tuban",
+    d: "Web profil BEM sekaligus portal administrasi: pengajuan dan pelacakan surat UKM sampai kemahasiswaan, arsip, program kerja, aspirasi mahasiswa dengan nomor tiket, akun per kementerian dengan hak akses berbeda, dan notifikasi Web Push.",
+    tags: ["LARAVEL", "MySQL", "WEB PUSH", "CPANEL"],
+    accent: "cyan-purple", link: "https://bemitbtuban.com",
+    imgs: ["projects/bem-1.jpg", "projects/bem-2.jpg", "projects/bem-3.jpg"],
   },
   {
-    n: "002", t: "SISTEM PEMBAYARAN MAHASISWA", status: "",
+    n: "002", t: "WEBSITE DSU TUBAN", status: "LIVE", org: "DSU Tuban",
+    d: "Website Dompet Sosial Al-Uswah Tuban, dibangun ulang dari WordPress ke Laravel dengan panel admin untuk mengelola program, kegiatan, artikel, buletin, dan struktur pengurus, plus kalkulator zakat.",
+    tags: ["LARAVEL", "TAILWIND", "MySQL", "BREEZE"],
+    accent: "green-cyan", link: "https://dsu.or.id",
+    imgs: ["projects/dsu-1.jpg", "projects/dsu-2.jpg", "projects/dsu-3.jpg"],
+  },
+  {
+    n: "003", t: "MICRO-ERP LATAR KOPI", status: "DEV", org: "Latar Kopi",
+    d: "Sistem operasional kafe: pelanggan memesan dengan scan QR di meja, pembayaran dikonfirmasi kasir, lalu pesanan diteruskan ke dapur. Dilengkapi kode pesanan otomatis dan manajemen stok bahan baku.",
+    tags: ["LARAVEL", "TAILWIND", "MySQL"],
+    accent: "orange-pink", link: "",
+    imgs: [],
+  },
+  {
+    n: "004", t: "SISTEM PEMBAYARAN MAHASISWA", status: "", org: "ITB Tuban",
     d: "Sistem untuk mengelola pembayaran mahasiswa Institut Teknologi dan Bisnis Tuban.",
     tags: [],
-    accent: "green-cyan", link: "", img: "projects/pembayaran.jpg",
+    accent: "purple-pink", link: "",
+    imgs: [],
   },
   {
-    n: "003", t: "SIM UKM ITB TUBAN", status: "",
+    n: "005", t: "SIM UKM ITB TUBAN", status: "", org: "ITB Tuban",
     d: "Sistem informasi manajemen untuk Unit Kegiatan Mahasiswa Institut Teknologi dan Bisnis Tuban.",
     tags: [],
-    accent: "purple-pink", link: "", img: "projects/ukm.jpg",
+    accent: "blue-cyan", link: "",
+    imgs: [],
+  },
+  {
+    n: "006", t: "WEBSITE UKM KEWIRAUSAHAAN", status: "DEV", org: "UKM Kewirausahaan",
+    d: "Perbaikan dan penyempurnaan website UKM Kewirausahaan ITB Tuban, disiapkan untuk dikelola sendiri oleh admin UKM setelah online.",
+    tags: ["LARAVEL"],
+    accent: "yellow-green", link: "",
+    imgs: [],
   },
 ];
 
 const pjHost = (u) => { try { return new URL(u).host.replace(/^www\./, ""); } catch (e) { return ""; } };
+const pjStatus = { LIVE: ["LIVE", ""], DEV: ["DALAM PENGEMBANGAN", " dev"] };
 
 document.getElementById("pjGrid").innerHTML = projects.map((pj) => `
   <${pj.link ? `a href="${pj.link}" target="_blank" rel="noopener"` : "div"} class="pj${pj.link ? " has-link" : ""}" data-accent="${pj.accent}">
     <div class="pj-shot">
       <div class="pj-bar"><i></i><i></i><i></i><em>${pjHost(pj.link) || pj.t.toLowerCase()}</em></div>
       <div class="pj-img">
-        ${pj.img ? `<img src="${pj.img}" alt="Screenshot ${pj.t}" loading="lazy" onerror="this.remove()">` : ""}
         <span class="pj-empty">SCREENSHOT MENYUSUL</span>
+        ${pj.imgs.map((src, i) => `<img src="${src}" alt="Screenshot ${pj.t}" loading="lazy"${i === 0 ? ' class="on"' : ""} onerror="this.remove()">`).join("")}
+        ${pj.imgs.length > 1 ? `<div class="pj-ind">${pj.imgs.map((_, i) => `<i${i === 0 ? ' class="on"' : ""}></i>`).join("")}</div>` : ""}
       </div>
     </div>
     <div class="pj-in">
       ${pj.link ? `<div class="pj-arr">↗</div>` : ""}
-      <div class="pj-n">//${pj.n}${pj.status ? `<span class="pj-live"><span class="ct-dot"></span>${pj.status}</span>` : ""}</div>
+      <div class="pj-n">//${pj.n}${pjStatus[pj.status] ? `<span class="pj-live${pjStatus[pj.status][1]}"><span class="ct-dot"></span>${pjStatus[pj.status][0]}</span>` : ""}</div>
       <div class="pj-t">${pj.t}</div>
       <div class="pj-d">${pj.d}</div>
       ${pj.tags.length ? `<div class="pj-tags">${pj.tags.map((t) => `<span class="pj-tag">${t}</span>`).join("")}</div>` : ""}
     </div>
   </${pj.link ? "a" : "div"}>`).join("");
+
+// Screenshot berganti otomatis tiap 3,5 detik
+setInterval(() => {
+  document.querySelectorAll(".pj-img").forEach((box) => {
+    const imgs = [...box.querySelectorAll("img")];
+    if (imgs.length < 2) return;
+    const i = imgs.findIndex((im) => im.classList.contains("on"));
+    const next = (i + 1) % imgs.length;
+    imgs.forEach((im, k) => im.classList.toggle("on", k === next));
+    box.querySelectorAll(".pj-ind i").forEach((d, k) => d.classList.toggle("on", k === next));
+  });
+}, 3500);
 
 // =============================================
 // COUNTER
@@ -206,7 +245,7 @@ const statsObs = new IntersectionObserver((entries) => {
     if (e.isIntersecting) {
       animCount(document.getElementById("sn1"), projects.length, "");
       animCount(document.getElementById("sn2"), projects.filter((p) => p.status === "LIVE").length, "");
-      animCount(document.getElementById("sn3"), 2, "");
+      animCount(document.getElementById("sn3"), new Set(projects.map((p) => p.org)).size, "");
       animCount(document.getElementById("sn4"), skills.length + tools.length, "");
       statsObs.disconnect();
     }

@@ -950,3 +950,21 @@ footer p { font-size: 0.8rem; letter-spacing: 0.06em; }
   .socials { gap: 1rem; }
   footer { padding: 1.4rem 1rem; }
 }
+
+/* =============================================
+   PROJECTS — screenshot bergantian & label status
+   ============================================= */
+.pj-img img { z-index: 0; }
+.pj-img img.on { z-index: 1; animation: pjFade 0.8s ease; }
+@keyframes pjFade { from { opacity: 0; } to { opacity: 1; } }
+.pj-img:has(img) .pj-empty { display: none; }
+.pj-ind {
+  position: absolute; left: 50%; bottom: 10px; transform: translateX(-50%); z-index: 2;
+  display: flex; gap: 5px; padding: 4px 8px; border-radius: 99px;
+  background: rgba(28,33,64,0.45); backdrop-filter: blur(6px);
+}
+.pj-ind i { width: 6px; height: 6px; border-radius: 99px; background: rgba(255,255,255,0.55); transition: width 0.3s, background 0.3s; }
+.pj-ind i.on { width: 16px; background: #fff; }
+.pj-live.dev { color: #b07800; background: rgba(255,184,0,0.1); border-color: rgba(255,184,0,0.35); }
+.pj-live.dev .ct-dot { background: #ffb800; animation: none; }
+@media (prefers-reduced-motion: reduce) { .pj-img img.on { animation: none; } }
