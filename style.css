@@ -829,3 +829,15 @@ body.built .nav-shell, body.built .h-stamp, body.built .h-side, body.built .m-ta
   .bb em { font-size: 0.55rem; }
   .bb-size { display: none; }
 }
+
+/* =============================================
+   HERO — tulisan & foto menempel di tengah (tanpa celah lebar)
+   ============================================= */
+@media (min-width: 769px) {
+  #hero { grid-template-columns: minmax(0, max-content) minmax(0, max-content); justify-content: center; column-gap: clamp(1.2rem, 2.6vw, 3rem); max-width: min(1440px, 100%); }
+  .hero-text { min-width: 0; }
+  .hero-photo-wrap > .photo-card-spinner { justify-content: flex-start; }
+  .h-title { font-size: clamp(2.6rem, min(6.6vw, 15.5svh), 8.4rem); }
+  .h-sub { font-size: clamp(0.9rem, 2.5svh, 1.15rem); }
+  .h-pill { font-size: clamp(0.72rem, 1.9svh, 0.88rem); }
+}
