@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Askhabur Royyan — Web Developer Laravel</title>
   <meta name="description" content="Portofolio Askhabur Royyan, web developer Laravel dari Tuban. Membangun sistem informasi untuk yayasan, kampus, dan organisasi.">
-  <link rel="stylesheet" href="style.css?v=14">
+  <link rel="stylesheet" href="style.css?v=20">
 </head>
 <body>
   <!-- LOADER -->
@@ -43,7 +43,7 @@
     <section id="hero">
       <div class="hero-text">
         <p class="h-tag">// VIBE CODER · LARAVEL · WEB · MOBILE · AI-POWERED</p>
-        <h1 class="h-title">CRAFTING<br>DIGITAL<br>WORLDS</h1>
+        <h1 class="h-title">CRAFTING<br><span>DIGITAL</span><br>WORLDS</h1>
         <p class="h-sub">BUILDING ANYTHING WITH AI — WEB, MOBILE &amp; BEYOND</p>
         <div class="h-stack">
           <span class="h-pill">LARAVEL</span>
@@ -53,7 +53,7 @@
           <span class="h-pill">VIBE CODER</span>
         </div>
         <div class="h-cta">
-          <button class="btn-c" onclick="go('work')">VIEW WORK →</button>
+          <button class="btn-c" onclick="go('work')"><span class="btn-ic">→</span>VIEW WORK</button>
           <button class="btn-o" onclick="window.open('https://wa.me/6281997999698?text=Halo%20Royyan%2C%20saya%20lihat%20portofolio%20kamu%20dan%20ingin%20berdiskusi.', '_blank')">CONTACT ME</button>
         </div>
       </div>
@@ -61,136 +61,152 @@
       <div class="hero-photo-wrap">
         <div class="photo-card-spinner" id="photoSpinner">
           <div id="photoCard">
-            <div class="photo-ring"></div>
-            <img class="photo-img" src="Ar.jpeg" alt="Profile Photo">
+            <div class="photo-clip">
+              <div class="photo-block"></div>
+              <img class="photo-img" src="Ar.jpeg" alt="Foto Askhabur Royyan">
+            </div>
+            <div class="h-stamp" aria-label="Available for freelance">
+              <svg viewBox="0 0 120 120" class="h-stamp-ring" aria-hidden="true">
+                <defs><path id="stampCircle" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"/></defs>
+                <text textLength="268" lengthAdjust="spacing"><textPath href="#stampCircle" textLength="268" lengthAdjust="spacing">WEB · MOBILE · DESKTOP · WEB · MOBILE · DESKTOP ·</textPath></text>
+              </svg>
+              <span class="h-stamp-in">AVAILABLE<br>FOR<br>FREELANCE</span>
+            </div>
+          </div>
+        </div>
+        <div class="h-side">
+          <span class="h-based">BASED IN<br>TUBAN</span>
+          <span class="h-line"></span>
+          <span class="h-script">Build<br>Solve<br>Ship</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SELECTED WORK -->
+    <section class="sec" id="work">
+      <div class="sec-row">
+        <h2 class="seh">SELECTED <span>WORK</span></h2>
+        <a class="sec-link" href="https://github.com/AskhaburRoyyan" target="_blank" rel="noopener">LIHAT GITHUB <i>↗</i></a>
+      </div>
+      <div class="pj-grid" id="pjGrid"></div>
+      <div class="pj-dots" id="pjDots"></div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="sec" id="services">
+      <div class="sv-grid">
+        <div class="sv-head">
+          <span class="sv-arrow">↗</span>
+          <h2>SERVICES</h2>
+          <p>Yang bisa saya bantu kerjakan untuk organisasi, kampus, dan usaha kamu.</p>
+        </div>
+        <div class="sv-items">
+          <div class="sv-item">
+            <span class="sv-ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="1"/><path d="M8 20h8M12 16v4"/></svg></span>
+            <div><h3>WEB DEVELOPMENT</h3><p>Website profil dan aplikasi web dengan Laravel, rapi di laptop maupun HP, siap online di hosting.</p></div>
+          </div>
+          <div class="sv-item">
+            <span class="sv-ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><path d="M14 17.5h7M17.5 14v7"/></svg></span>
+            <div><h3>SISTEM INFORMASI</h3><p>Panel admin, multi-role, laporan, dan alur kerja organisasi yang didigitalkan dari nol.</p></div>
+          </div>
+          <div class="sv-item">
+            <span class="sv-ic"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="1"/><path d="M11 18h2"/></svg></span>
+            <div><h3>APLIKASI ANDROID</h3><p>Aplikasi mobile Android dengan Java di Android Studio.</p></div>
+          </div>
+          <div class="sv-item">
+            <span class="sv-ic"><svg viewBox="0 0 24 24"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg></span>
+            <div><h3>APLIKASI DESKTOP</h3><p>Aplikasi desktop dengan Java di NetBeans untuk kebutuhan operasional offline.</p></div>
           </div>
         </div>
       </div>
-
-      <div class="sc-ind"><span>SCROLL</span><div class="sc-line"></div></div>
     </section>
 
     <!-- ABOUT -->
     <section class="sec" id="about">
       <div class="abt-grid">
-
-        <!-- KIRI: foto + tech stack -->
-        <div class="abt-left">
-          <div class="abt-visual">
-            <span class="abt-label">SOFTWARE<br>DEVELOPER</span>
-            <span class="abt-dots"><i></i><i></i><i></i><i></i></span>
-            <div class="abt-hex">
-              <div class="abt-hex-in"><img src="Roy.jpeg" alt="Askhabur Royyan"></div>
-            </div>
-            <div class="abt-badge">
-              <span class="abt-badge-ic">&lt;/&gt;</span>
-              <span>TURNING IDEAS<br>INTO SOLUTIONS</span>
-              <span class="abt-badge-arr">→</span>
-            </div>
-          </div>
-
-          <p class="abt-mini">// TECH STACK</p>
-          <div class="abt-chips">
-            <span class="abt-chip"><img src="icons/laravel.svg" alt="" width="16" height="16"> Laravel</span>
-            <span class="abt-chip"><img src="icons/codeigniter.svg" alt="" width="16" height="16"> CodeIgniter</span>
-            <span class="abt-chip"><img src="icons/php.svg" alt="" width="16" height="16"> PHP</span>
-            <span class="abt-chip"><img src="icons/javascript.svg" alt="" width="16" height="16"> JavaScript</span>
-            <span class="abt-chip"><img src="icons/html5.svg" alt="" width="16" height="16"> HTML</span>
-            <span class="abt-chip"><img src="icons/css3.svg" alt="" width="16" height="16"> CSS</span>
-            <span class="abt-chip"><img src="icons/mysql.svg" alt="" width="16" height="16"> MySQL</span>
-            <span class="abt-chip"><img src="icons/tailwindcss.svg" alt="" width="16" height="16"> Tailwind</span>
-            <span class="abt-chip"><img src="icons/java.svg" alt="" width="16" height="16"> Java</span>
-            <span class="abt-chip"><img src="icons/androidstudio.svg" alt="" width="16" height="16"> Android Studio</span>
-            <span class="abt-chip"><img src="icons/netbeans.svg" alt="" width="16" height="16"> NetBeans</span>
-          </div>
-          <div class="abt-soc">
-            <a href="https://github.com/AskhaburRoyyan" target="_blank" rel="noopener">GH</a>
-            <a href="https://wa.me/6281997999698?text=Halo%20Royyan%2C%20saya%20lihat%20portofolio%20kamu%20dan%20ingin%20berdiskusi." target="_blank" rel="noopener">WA</a>
-            <a href="mailto:askhabur_royyan313@email.com">✉</a>
-          </div>
-        </div>
-
-        <!-- KANAN: teks + statistik -->
-        <div class="abt-right">
-          <p class="abt-eyb">// 001 — ABOUT</p>
+        <div class="abt-text">
+          <p class="eyb">ABOUT ME</p>
           <h2 class="abt-title">WHO <span>AM I</span></h2>
-
           <p class="abt-p">Mahasiswa S1 Sistem Informasi di Institut Teknologi dan Bisnis Tuban yang membangun aplikasi <b>web</b>, <b>mobile</b>, dan <b>desktop</b>. Untuk web, saya mengandalkan <b>Laravel</b>, <b>CodeIgniter</b>, dan <b>JavaScript</b>, mulai dari panel admin, pengelolaan data, sampai deploy ke hosting.</p>
           <p class="abt-p">Saya terbiasa memakai <b>workflow dan tools modern</b> untuk mempercepat eksplorasi, debugging, dan proses development, tanpa mengurangi kendali atas solusi yang saya bangun.</p>
           <p class="abt-quote">Build fast. Solve problems. Ship things.</p>
-
-          <p class="abt-mini">// MY JOURNEY</p>
-          <div class="abt-stats">
-            <div class="abt-stat"><i>📅</i><div><div class="abt-n" id="sn1">0</div><small>PROYEK NYATA</small></div></div>
-            <div class="abt-stat"><i>📁</i><div><div class="abt-n" id="sn2">0</div><small>WEBSITE LIVE</small></div></div>
-            <div class="abt-stat"><i>👥</i><div><div class="abt-n" id="sn3">0</div><small>ORGANISASI</small></div></div>
-            <div class="abt-stat"><i>&lt;/&gt;</i><div><div class="abt-n" id="sn4">0</div><small>TEKNOLOGI</small></div></div>
-          </div>
         </div>
 
+        <div class="abt-photo">
+          <div class="abt-photo-block"></div>
+          <img src="Roy.jpeg" alt="Askhabur Royyan" loading="lazy">
+        </div>
+
+        <div class="abt-facts">
+          <div class="abt-fact"><span>PENDIDIKAN</span><b>S1 Sistem Informasi, ITB Tuban</b></div>
+          <div class="abt-fact"><span>FOKUS</span><b>Web · Android · Desktop</b></div>
+          <div class="abt-fact"><span>PROYEK</span><b id="factProjects">6 proyek, 2 sudah live</b></div>
+          <div class="abt-fact"><span>LOKASI</span><b>Tuban, Jawa Timur</b></div>
+          <button class="btn-line" onclick="go('contact')">HUBUNGI SAYA <i>↓</i></button>
+        </div>
       </div>
     </section>
 
-    <!-- SKILLS — kartu statis -->
+    <!-- TECH STACK -->
     <section class="sec" id="skills">
-      <div class="sec-head">
-        <p class="eyb">// 002 — ARSENAL</p>
-        <h2 class="seh">TECH STACK</h2>
+      <div class="sec-row">
+        <h2 class="seh">TECH <span>STACK</span></h2>
+        <p class="sec-note">Teknologi yang saya pakai di proyek nyata.</p>
       </div>
-
       <div class="sk-grid" id="skGrid"></div>
-      <p class="m-hint">Geser untuk melihat lainnya →</p>
-      <div class="sk-grid mini" id="skGridMini"></div>
     </section>
 
-    <!-- PROJECTS — kartu statis dengan screenshot -->
-    <section class="sec" id="work">
-      <div class="sec-head">
-        <p class="eyb">// 003 — SELECTED WORK</p>
-        <h2 class="seh">PROJECTS</h2>
+    <!-- PERNAH BEKERJA DENGAN -->
+    <section class="partners">
+      <div class="pt-in">
+        <p class="pt-label">PERNAH BEKERJA DENGAN</p>
+        <ul class="pt-list">
+          <li>BEM ITB Tuban</li>
+          <li>Dompet Sosial Al-Uswah</li>
+          <li>ITB Tuban</li>
+          <li>UKM Kewirausahaan</li>
+          <li>Latar Kopi</li>
+        </ul>
       </div>
-
-      <div class="pj-grid" id="pjGrid"></div>
-      <div class="pj-dots" id="pjDots"></div>
     </section>
 
-    <!-- CONTACT — orbit berputar + email shimmer -->
-    <section class="sec" id="contact">
-      <div class="sec-head ct-head">
-        <p class="eyb">// 004 — CONNECT</p>
-        <h2 class="seh">LET'S BUILD</h2>
-      </div>
-
-      <div class="ct-stage">
-        <div class="ct-orbit o1"><i>◆</i></div>
-        <div class="ct-orbit o2"><i>●</i></div>
-        <div class="ct-orbit o3"><i>✦</i></div>
-
-        <div class="ct-box">
-          <p class="ct-status"><span class="ct-dot"></span>TERBUKA UNTUK FREELANCE, MAGANG &amp; KERJA</p>
-          <p class="ct-email">askhabur_royyan313@email.com</p>
-          <button class="btn-c ct-btn" onclick="window.open('https://wa.me/6281997999698?text=Halo%20Royyan%2C%20saya%20lihat%20portofolio%20kamu%20dan%20ingin%20berdiskusi.', '_blank')">CHAT WHATSAPP →</button>
-          <div class="socials">
-            <a class="soc" href="https://wa.me/6281997999698?text=Halo%20Royyan%2C%20saya%20lihat%20portofolio%20kamu%20dan%20ingin%20berdiskusi." target="_blank" rel="noopener">WHATSAPP</a>
-            <a class="soc" href="mailto:askhabur_royyan313@email.com">EMAIL</a>
-            <a class="soc" href="https://github.com/AskhaburRoyyan" target="_blank" rel="noopener">GITHUB</a>
-          </div>
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="ct-in">
+        <a class="ct-cta" href="https://wa.me/6281997999698?text=Halo%20Royyan%2C%20saya%20lihat%20portofolio%20kamu%20dan%20ingin%20berdiskusi." target="_blank" rel="noopener">
+          <span class="ct-small">LET'S BUILD</span>
+          <span class="ct-big">SOMETHING GREAT<br>TOGETHER.</span>
+          <span class="ct-circle">↗</span>
+        </a>
+        <div class="ct-col">
+          <p class="ct-h">GET IN TOUCH</p>
+          <a href="https://wa.me/6281997999698?text=Halo%20Royyan%2C%20saya%20lihat%20portofolio%20kamu%20dan%20ingin%20berdiskusi." target="_blank" rel="noopener"><i class="ct-i">WA</i>0819-9799-9698</a>
+          <a href="mailto:askhabur_royyan313@email.com"><i class="ct-i">@</i>askhabur_royyan313@email.com</a>
+          <span><i class="ct-i">⌖</i>Tuban, Jawa Timur</span>
+        </div>
+        <div class="ct-col">
+          <p class="ct-h">FOLLOW</p>
+          <a href="https://github.com/AskhaburRoyyan" target="_blank" rel="noopener"><i class="ct-i">GH</i>GitHub</a>
+          <span class="ct-status"><span class="ct-dot"></span>Terbuka untuk freelance, magang &amp; kerja</span>
         </div>
       </div>
     </section>
 
-    <footer><p>© 2026 Askhabur Royyan</p></footer>
+    <footer>
+      <img src="logoAR.png" alt="" class="ft-logo">
+      <p>© 2026 Askhabur Royyan. All rights reserved.</p>
+    </footer>
   </div>
 
   <!-- MENU BAWAH (khusus HP) -->
   <div class="m-tab" role="navigation" aria-label="Navigasi">
     <a onclick="go('hero')" data-sec="hero"><span>⌂</span>Home</a>
+    <a onclick="go('work')" data-sec="work"><span>▣</span>Work</a>
     <a onclick="go('about')" data-sec="about"><span>◉</span>About</a>
     <a onclick="go('skills')" data-sec="skills"><span>◈</span>Stack</a>
-    <a onclick="go('work')" data-sec="work"><span>▣</span>Work</a>
     <a onclick="go('contact')" data-sec="contact"><span>✉</span>Contact</a>
   </div>
 
-  <script src="main.js?v=14"></script>
+  <script src="main.js?v=20"></script>
 </body>
 </html>

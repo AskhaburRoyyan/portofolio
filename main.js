@@ -94,62 +94,33 @@ document.getElementById("hero").addEventListener("mouseleave", () => {
 });
 
 // =============================================
-// SKILLS — kartu statis, tanpa persentase
-// Baris atas: kartu besar · Baris bawah: kartu mini
-// accent: cyan | purple | green | orange | pink | yellow
+// TECH STACK — logo asli (folder icons/)
 // =============================================
-// logo: nama file di folder icons/ (tanpa .svg)
 const skills = [
-  { cat: "BACKEND", logo: ["laravel"], nm: "LARAVEL", ds: "MVC, autentikasi (Breeze), Eloquent ORM, panel admin CRUD", accent: "pink" },
-  { cat: "BACKEND", logo: ["codeigniter"], nm: "CODEIGNITER", ds: "Aplikasi web PHP dengan pola MVC", accent: "orange" },
-  { cat: "LANGUAGE", logo: ["php"], nm: "PHP", ds: "Bahasa utama untuk logika backend", accent: "purple" },
-  { cat: "DATABASE", logo: ["mysql"], nm: "MySQL", ds: "Perancangan tabel, relasi, dan query", accent: "cyan" },
-  { cat: "LANGUAGE", logo: ["javascript"], nm: "JAVASCRIPT", ds: "Interaksi halaman dan validasi form", accent: "yellow" },
+  { logo: ["laravel"], nm: "Laravel", cat: "Backend" },
+  { logo: ["codeigniter"], nm: "CodeIgniter", cat: "Backend" },
+  { logo: ["php"], nm: "PHP", cat: "Bahasa" },
+  { logo: ["mysql"], nm: "MySQL", cat: "Database" },
+  { logo: ["javascript"], nm: "JavaScript", cat: "Bahasa" },
+  { logo: ["html5", "css3"], nm: "HTML & CSS", cat: "Frontend" },
+  { logo: ["tailwindcss"], nm: "Tailwind CSS", cat: "Frontend" },
+  { logo: ["git", "github"], nm: "Git & GitHub", cat: "Tools" },
+  { logo: ["cpanel"], nm: "cPanel", cat: "Deploy" },
+  { logo: ["java", "androidstudio"], nm: "Java · Android Studio", cat: "Mobile" },
+  { logo: ["java", "netbeans"], nm: "Java · NetBeans", cat: "Desktop" },
 ];
 
-const tools = [
-  { cat: "FRONTEND", logo: ["html5", "css3"], nm: "HTML & CSS", accent: "orange" },
-  { cat: "FRONTEND", logo: ["tailwindcss"], nm: "TAILWIND CSS", accent: "cyan" },
-  { cat: "TOOLS", logo: ["git", "github"], nm: "GIT & GITHUB", accent: "green" },
-  { cat: "DEPLOY", logo: ["cpanel"], nm: "CPANEL HOSTING", accent: "purple" },
-  { cat: "MOBILE", logo: ["java", "androidstudio"], nm: "JAVA · ANDROID STUDIO", accent: "pink" },
-  { cat: "DESKTOP", logo: ["java", "netbeans"], nm: "JAVA · NETBEANS", accent: "yellow" },
-];
-
-const skLogos = (s) => s.logo.map((l) => `<img src="icons/${l}.svg" alt="${l}" loading="lazy">`).join("");
-
-const accentColors = {
-  cyan: "#00cfff", purple: "#7b5cff", green: "#00d68f",
-  orange: "#ff6b35", pink: "#ff4d9d", yellow: "#ffb800",
-};
-
-document.getElementById("skGrid").innerHTML = skills.map((s) => {
-  const col = accentColors[s.accent];
-  return `
-    <div class="sk" data-accent="${s.accent}">
-      <div class="sk-cat" style="color:${col}">${s.cat}</div>
-      <div class="sk-ic">${skLogos(s)}</div>
-      <div class="sk-nm">${s.nm}</div>
-      <div class="sk-ds">${s.ds}</div>
-    </div>`;
-}).join("");
-
-document.getElementById("skGridMini").innerHTML = tools.map((s) => {
-  const col = accentColors[s.accent];
-  return `
-    <div class="sk mini" data-accent="${s.accent}">
-      <div class="sk-ic">${skLogos(s)}</div>
-      <div class="sk-mini-tx">
-        <div class="sk-nm">${s.nm}</div>
-        <div class="sk-mini-cat" style="color:${col}">${s.cat}</div>
-      </div>
-    </div>`;
-}).join("");
+document.getElementById("skGrid").innerHTML = skills.map((s) => `
+  <div class="sk">
+    <div class="sk-ic">${s.logo.map((l) => `<img src="icons/${l}.svg" alt="${l}" loading="lazy">`).join("")}</div>
+    <div class="sk-nm">${s.nm}</div>
+    <div class="sk-cat">${s.cat}</div>
+  </div>`).join("") + `
+  <div class="sk sk-more"><span>↗</span><b>TERUS<br>BELAJAR</b></div>`;
 
 // =============================================
-// PROJECTS — screenshot bergantian otomatis
-// imgs: taruh foto di folder "projects/" lalu tulis
-// namanya, misal "projects/latarkopi-1.jpg".
+// SELECTED WORK — screenshot bergantian otomatis
+// imgs: foto di folder "projects/"
 // status: "LIVE" | "DEV" | ""  (DEV = dalam pengembangan)
 // =============================================
 const projects = [
@@ -157,70 +128,79 @@ const projects = [
     n: "001", t: "WEBSITE & PORTAL BEM ITB TUBAN", status: "LIVE", org: "BEM ITB Tuban",
     d: "Web profil BEM sekaligus portal administrasi: pengajuan dan pelacakan surat UKM sampai kemahasiswaan, arsip, program kerja, aspirasi mahasiswa dengan nomor tiket, akun per kementerian dengan hak akses berbeda, dan notifikasi Web Push.",
     tags: ["LARAVEL", "MySQL", "WEB PUSH", "CPANEL"],
-    accent: "cyan-purple", link: "https://bemitbtuban.com",
+    cat: "WEB PORTAL", link: "https://bemitbtuban.com",
     imgs: ["projects/bem-1.jpg", "projects/bem-2.jpg", "projects/bem-3.jpg"],
   },
   {
     n: "002", t: "WEBSITE DSU TUBAN", status: "LIVE", org: "DSU Tuban",
     d: "Website Dompet Sosial Al-Uswah Tuban, dibangun ulang dari WordPress ke Laravel dengan panel admin untuk mengelola program, kegiatan, artikel, buletin, dan struktur pengurus, plus kalkulator zakat.",
     tags: ["LARAVEL", "TAILWIND", "MySQL", "BREEZE"],
-    accent: "green-cyan", link: "https://dsu.or.id",
+    cat: "WEBSITE YAYASAN", link: "https://dsu.or.id",
     imgs: ["projects/dsu-1.jpg", "projects/dsu-2.jpg", "projects/dsu-3.jpg"],
   },
   {
     n: "003", t: "MICRO-ERP LATAR KOPI", status: "DEV", org: "Latar Kopi",
     d: "Sistem operasional kafe: pelanggan memesan dengan scan QR di meja, pembayaran dikonfirmasi kasir, lalu pesanan diteruskan ke dapur. Resep tiap menu memotong stok bahan baku otomatis dan menghitung HPP serta margin. Akun terpisah untuk owner, kasir, dan dapur.",
     tags: ["LARAVEL", "TAILWIND", "MySQL"],
-    accent: "orange-pink", link: "",
+    cat: "SISTEM KAFE · ERP", link: "",
     imgs: ["projects/latarkopi-1.jpg", "projects/latarkopi-2.jpg", "projects/latarkopi-3.jpg"],
   },
   {
     n: "004", t: "SISTEM PEMBAYARAN MAHASISWA", status: "", org: "ITB Tuban",
     d: "Sistem pembayaran kampus: admin membuat tagihan per jenis pembayaran dan tahun akademik, mengatur potongan dan cicilan, memverifikasi bukti transfer, lalu mengekspor laporan rekap dan tunggakan ke Excel atau PDF. Mahasiswa masuk dengan NIM untuk melihat tagihannya.",
     tags: ["LARAVEL", "LIVEWIRE", "MySQL"],
-    accent: "purple-pink", link: "",
+    cat: "SISTEM PEMBAYARAN", link: "",
     imgs: ["projects/pembayaran-1.jpg", "projects/pembayaran-2.jpg", "projects/pembayaran-3.jpg"],
   },
   {
     n: "005", t: "SIM UKM ITB TUBAN", status: "", org: "ITB Tuban",
     d: "Platform pengelolaan UKM kampus: data UKM, pendaftaran anggota, kegiatan dan absensi, proposal, SK, prestasi, serta anggaran. Lima peran dengan dashboard masing-masing: admin, pengurus, sekretariat, bendahara, dan mahasiswa.",
     tags: ["LARAVEL", "MySQL", "MULTI-ROLE"],
-    accent: "blue-cyan", link: "",
+    cat: "SISTEM INFORMASI", link: "",
     imgs: ["projects/simukm-1.jpg"],
   },
   {
     n: "006", t: "WEBSITE UKM KEWIRAUSAHAAN", status: "DEV", org: "UKM Kewirausahaan",
     d: "Website UKM Kewirausahaan ITB Tuban: katalog produk mahasiswa, profil usaha anggota, cek pesanan, agenda dengan pendaftaran online, galeri, testimoni, pendaftaran anggota, dan portal khusus anggota. Disiapkan untuk dikelola sendiri oleh admin UKM.",
     tags: ["LARAVEL", "MySQL"],
-    accent: "yellow-green", link: "",
+    cat: "WEBSITE UKM", link: "",
     imgs: ["projects/ukmkwu-1.jpg"],
   },
 ];
 
+
 const pjHost = (u) => { try { return new URL(u).host.replace(/^www\./, ""); } catch (e) { return ""; } };
 const pjStatus = { LIVE: ["LIVE", ""], DEV: ["DALAM PENGEMBANGAN", " dev"] };
 
-document.getElementById("pjGrid").innerHTML = projects.map((pj) => `
-  <${pj.link ? `a href="${pj.link}" target="_blank" rel="noopener"` : "div"} class="pj${pj.link ? " has-link" : ""}" data-accent="${pj.accent}">
-    <div class="pj-shot">
-      <div class="pj-bar"><i></i><i></i><i></i><em>${pjHost(pj.link) || pj.t.toLowerCase()}</em></div>
-      <div class="pj-img">
-        <span class="pj-empty">SCREENSHOT MENYUSUL</span>
-        ${pj.imgs.map((src, i) => `<img src="${src}" alt="Screenshot ${pj.t}" loading="lazy"${i === 0 ? ' class="on"' : ""} onerror="this.remove()">`).join("")}
-        ${pj.imgs.length > 1 ? `<div class="pj-ind">${pj.imgs.map((_, i) => `<i${i === 0 ? ' class="on"' : ""}></i>`).join("")}</div>` : ""}
+document.getElementById("pjGrid").innerHTML = projects.map((pj) => {
+  const tag = pj.link ? `a href="${pj.link}" target="_blank" rel="noopener"` : "div";
+  const end = pj.link ? "a" : "div";
+  return `
+  <${tag} class="pj${pj.link ? " has-link" : ""}">
+    <div class="pj-img">
+      <span class="pj-empty">SCREENSHOT MENYUSUL</span>
+      ${pj.imgs.map((src, i) => `<img src="${src}" alt="Screenshot ${pj.t}" loading="lazy"${i === 0 ? ' class="on"' : ""} onerror="this.remove()">`).join("")}
+      ${pjStatus[pj.status] ? `<span class="pj-badge${pjStatus[pj.status][1]}">${pjStatus[pj.status][0]}</span>` : ""}
+      ${pj.imgs.length > 1 ? `<div class="pj-ind">${pj.imgs.map((_, i) => `<i${i === 0 ? ' class="on"' : ""}></i>`).join("")}</div>` : ""}
+    </div>
+    <div class="pj-bar">
+      <div><span class="pj-cat">${pj.cat}</span><span class="pj-t">${pj.t}</span></div>
+      <span class="pj-arr">${pj.link ? "↗" : pj.n}</span>
+    </div>
+    <div class="pj-body">
+      <p class="pj-d">${pj.d}</p>
+      <div class="pj-meta">
+        <span class="pj-org">${pj.org}${pj.link ? ` · ${pjHost(pj.link)}` : ""}</span>
+        ${pj.tags.length ? `<span class="pj-tags">${pj.tags.join(" · ")}</span>` : ""}
       </div>
     </div>
-    <div class="pj-in">
-      ${pj.link ? `<div class="pj-arr">↗</div>` : ""}
-      <div class="pj-n">//${pj.n}${pjStatus[pj.status] ? `<span class="pj-live${pjStatus[pj.status][1]}"><span class="ct-dot"></span>${pjStatus[pj.status][0]}</span>` : ""}</div>
-      <div class="pj-t">${pj.t}</div>
-      <div class="pj-d">${pj.d}</div>
-      ${pj.tags.length ? `<div class="pj-tags">${pj.tags.map((t) => `<span class="pj-tag">${t}</span>`).join("")}</div>` : ""}
-    </div>
-  </${pj.link ? "a" : "div"}>`).join("");
+  </${end}>`;
+}).join("");
 
-// Screenshot berganti otomatis tiap 3,5 detik
-// Hanya gambar yang sedang terlihat di layar yang berganti (hemat baterai/prosesor HP)
+const live = projects.filter((p) => p.status === "LIVE").length;
+document.getElementById("factProjects").textContent = `${projects.length} proyek, ${live} sudah live`;
+
+// Hanya screenshot yang sedang terlihat yang berganti (hemat baterai/prosesor HP)
 const pjVisible = new Set();
 const pjImgObs = new IntersectionObserver((entries) => {
   entries.forEach((e) => (e.isIntersecting ? pjVisible.add(e.target) : pjVisible.delete(e.target)));
@@ -240,42 +220,15 @@ setInterval(() => {
 }, 3500);
 
 // =============================================
-// COUNTER
-// =============================================
-function animCount(el, target, suffix = "") {
-  let v = 0;
-  const step = target / 50;
-  const iv = setInterval(() => {
-    v = Math.min(v + step, target);
-    el.textContent = Math.floor(v) + suffix;
-    if (v >= target) clearInterval(iv);
-  }, 28);
-}
-const statsObs = new IntersectionObserver((entries) => {
-  entries.forEach((e) => {
-    if (e.isIntersecting) {
-      animCount(document.getElementById("sn1"), projects.length, "");
-      animCount(document.getElementById("sn2"), projects.filter((p) => p.status === "LIVE").length, "");
-      animCount(document.getElementById("sn3"), new Set(projects.map((p) => p.org)).size, "");
-      animCount(document.getElementById("sn4"), skills.length + tools.length, "");
-      statsObs.disconnect();
-    }
-  });
-}, { threshold: 0.4 });
-statsObs.observe(document.getElementById("about"));
-
-// =============================================
 // MOBILE — menu bawah aktif & titik slider proyek
 // =============================================
 const mTabLinks = document.querySelectorAll(".m-tab a");
 const secObs = new IntersectionObserver((entries) => {
   entries.forEach((e) => {
-    if (e.isIntersecting) {
-      mTabLinks.forEach((a) => a.classList.toggle("on", a.dataset.sec === e.target.id));
-    }
+    if (e.isIntersecting) mTabLinks.forEach((a) => a.classList.toggle("on", a.dataset.sec === e.target.id));
   });
 }, { rootMargin: "-45% 0px -50% 0px" });
-["hero", "about", "skills", "work", "contact"].forEach((id) => {
+["hero", "work", "about", "skills", "contact"].forEach((id) => {
   const el = document.getElementById(id);
   if (el) secObs.observe(el);
 });
@@ -284,10 +237,9 @@ const pjGridEl = document.getElementById("pjGrid");
 const pjDotsEl = document.getElementById("pjDots");
 pjDotsEl.innerHTML = projects.map((_, i) => `<button aria-label="Proyek ${i + 1}"${i === 0 ? ' class="on"' : ""}></button>`).join("");
 const pjDotBtns = pjDotsEl.querySelectorAll("button");
-pjDotBtns.forEach((b, i) =>
-  b.addEventListener("click", () => pjGridEl.scrollTo({ left: i * pjGridEl.clientWidth, behavior: "smooth" }))
-);
+const pjStep = () => (pjGridEl.firstElementChild ? pjGridEl.firstElementChild.getBoundingClientRect().width + 12 : pjGridEl.clientWidth);
+pjDotBtns.forEach((b, i) => b.addEventListener("click", () => pjGridEl.scrollTo({ left: i * pjStep(), behavior: "smooth" })));
 pjGridEl.addEventListener("scroll", () => {
-  const i = Math.round(pjGridEl.scrollLeft / pjGridEl.clientWidth);
+  const i = Math.round(pjGridEl.scrollLeft / pjStep());
   pjDotBtns.forEach((b, k) => b.classList.toggle("on", k === i));
 }, { passive: true });
