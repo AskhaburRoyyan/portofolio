@@ -556,3 +556,14 @@ footer p { font-size: 0.78rem; color: var(--ink-soft); }
   .hero-text { padding: 0.9rem 0 1.6rem; gap: 0.7rem; }
   .hero-text { padding: 1.2rem 0 2rem; }
 }
+
+/* =============================================
+   FOTO HERO — tampil sampai paha (tidak terpotong di pinggang)
+   Tinggi gambar ~165% tinggi kotak, lebar kotak mengikuti foto
+   ============================================= */
+#photoCard { aspect-ratio: 0.95; width: auto; max-width: 100%; height: min(700px, calc(100svh - 5.5rem)); }
+.photo-img { width: auto; height: 165%; top: 0; }
+
+@media (max-width: 768px) {
+  #photoCard { height: clamp(250px, 34svh, 360px); width: auto; }
+}
