@@ -11,6 +11,7 @@ function go(id) {
 // Kursor warna-warni menggambar kerangka biru tiap elemen hero,
 // lalu kerangka berubah jadi tampilan asli. Diputar sekali per sesi.
 // =============================================
+if ("scrollRestoration" in history && !location.hash) history.scrollRestoration = "manual";
 const buildEl = document.getElementById("build");
 const buildSkip = document.getElementById("buildSkip");
 const buildPct = document.getElementById("buildPct");
@@ -38,12 +39,10 @@ function finishBuild() {
     buildEl.remove();
     document.body.classList.remove("intro-on");
   }, 650);
-  try { sessionStorage.setItem("arBuilt", "1"); } catch (e) {}
 }
 
 function playBuild() {
-  const seen = (() => { try { return sessionStorage.getItem("arBuilt") === "1"; } catch (e) { return false; } })();
-  if (reduceMotion || seen || location.hash || window.scrollY > 40) {
+  if (reduceMotion || location.hash) {
     buildEl.remove();
     document.body.classList.remove("intro-on");
     revealHero();
