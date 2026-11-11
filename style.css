@@ -842,3 +842,20 @@ body.built .nav-shell, body.built .h-stamp, body.built .h-side, body.built .m-ta
   .h-sub { font-size: clamp(0.82rem, 2.4svh, 1rem); }
   .h-pill { font-size: clamp(0.68rem, 1.75svh, 0.78rem); padding-left: 0.75rem; padding-right: 0.75rem; }
 }
+
+/* =============================================
+   POPUP — tombol geser di luar screenshot (tidak menutupi gambar)
+   ============================================= */
+.pd-ctrl { display: flex; align-items: center; justify-content: center; gap: 0.7rem; margin-top: -0.2rem; }
+.pd-gallery.single .pd-ctrl, .pd-gallery.empty .pd-ctrl { display: none; }
+.pd-ctrl .pd-nav {
+  position: static; transform: none; top: auto; left: auto; right: auto;
+  width: 32px; height: 32px; font-size: 0.85rem; line-height: 1;
+  background: #1b1f2a; color: #fff; border: 1.5px solid #3a4052; box-shadow: none;
+}
+.pd-ctrl .pd-nav:hover:not(:disabled) { background: var(--yellow); color: var(--ink); border-color: var(--yellow); }
+.pd-ctrl .pd-nav:disabled { opacity: 0.3; }
+.pd-ctrl .pd-count { position: static; min-width: 3.6rem; text-align: center; background: transparent; color: #fff; padding: 0; }
+@media (max-width: 768px) {
+  .pd-ctrl .pd-nav { width: 30px; height: 30px; }
+}
