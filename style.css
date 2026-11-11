@@ -968,3 +968,15 @@ footer p { font-size: 0.8rem; letter-spacing: 0.06em; }
 .pj-live.dev { color: #b07800; background: rgba(255,184,0,0.1); border-color: rgba(255,184,0,0.35); }
 .pj-live.dev .ct-dot { background: #ffb800; animation: none; }
 @media (prefers-reduced-motion: reduce) { .pj-img img.on { animation: none; } }
+
+/* =============================================
+   TECH STACK — logo asli (folder icons/)
+   ============================================= */
+.sk-ic { display: flex; align-items: center; gap: 0.45rem; }
+.sk-ic img { height: 38px; width: auto; display: block; }
+.sk.mini .sk-ic img { height: 28px; }
+.abt-chip img { width: 16px; height: 16px; flex-shrink: 0; }
+@media (max-width: 768px) {
+  .sk-ic img { height: 32px; }
+  .sk.mini .sk-ic img { height: 22px; }
+}

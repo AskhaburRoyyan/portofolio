@@ -98,22 +98,25 @@ document.getElementById("hero").addEventListener("mouseleave", () => {
 // Baris atas: kartu besar · Baris bawah: kartu mini
 // accent: cyan | purple | green | orange | pink | yellow
 // =============================================
+// logo: nama file di folder icons/ (tanpa .svg)
 const skills = [
-  { cat: "BACKEND", icon: "▣", nm: "LARAVEL", ds: "MVC, autentikasi (Breeze), Eloquent ORM, panel admin CRUD", accent: "pink" },
-  { cat: "BACKEND", icon: "◆", nm: "CODEIGNITER", ds: "Aplikasi web PHP dengan pola MVC", accent: "orange" },
-  { cat: "LANGUAGE", icon: "◎", nm: "PHP", ds: "Bahasa utama untuk logika backend", accent: "purple" },
-  { cat: "DATABASE", icon: "◐", nm: "MySQL", ds: "Perancangan tabel, relasi, dan query", accent: "cyan" },
-  { cat: "LANGUAGE", icon: "◈", nm: "JAVASCRIPT", ds: "Interaksi halaman dan validasi form", accent: "yellow" },
+  { cat: "BACKEND", logo: ["laravel"], nm: "LARAVEL", ds: "MVC, autentikasi (Breeze), Eloquent ORM, panel admin CRUD", accent: "pink" },
+  { cat: "BACKEND", logo: ["codeigniter"], nm: "CODEIGNITER", ds: "Aplikasi web PHP dengan pola MVC", accent: "orange" },
+  { cat: "LANGUAGE", logo: ["php"], nm: "PHP", ds: "Bahasa utama untuk logika backend", accent: "purple" },
+  { cat: "DATABASE", logo: ["mysql"], nm: "MySQL", ds: "Perancangan tabel, relasi, dan query", accent: "cyan" },
+  { cat: "LANGUAGE", logo: ["javascript"], nm: "JAVASCRIPT", ds: "Interaksi halaman dan validasi form", accent: "yellow" },
 ];
 
 const tools = [
-  { cat: "FRONTEND", icon: "⬡", nm: "HTML & CSS", accent: "orange" },
-  { cat: "FRONTEND", icon: "◉", nm: "TAILWIND CSS", accent: "cyan" },
-  { cat: "TOOLS", icon: "▶", nm: "GIT & GITHUB", accent: "green" },
-  { cat: "DEPLOY", icon: "◑", nm: "CPANEL HOSTING", accent: "purple" },
-  { cat: "PLATFORM", icon: "▯", nm: "APLIKASI MOBILE", accent: "pink" },
-  { cat: "PLATFORM", icon: "▭", nm: "APLIKASI DESKTOP", accent: "yellow" },
+  { cat: "FRONTEND", logo: ["html5", "css3"], nm: "HTML & CSS", accent: "orange" },
+  { cat: "FRONTEND", logo: ["tailwindcss"], nm: "TAILWIND CSS", accent: "cyan" },
+  { cat: "TOOLS", logo: ["git", "github"], nm: "GIT & GITHUB", accent: "green" },
+  { cat: "DEPLOY", logo: ["cpanel"], nm: "CPANEL HOSTING", accent: "purple" },
+  { cat: "MOBILE", logo: ["java", "androidstudio"], nm: "JAVA · ANDROID STUDIO", accent: "pink" },
+  { cat: "DESKTOP", logo: ["java", "netbeans"], nm: "JAVA · NETBEANS", accent: "yellow" },
 ];
+
+const skLogos = (s) => s.logo.map((l) => `<img src="icons/${l}.svg" alt="${l}" loading="lazy">`).join("");
 
 const accentColors = {
   cyan: "#00cfff", purple: "#7b5cff", green: "#00d68f",
@@ -125,7 +128,7 @@ document.getElementById("skGrid").innerHTML = skills.map((s) => {
   return `
     <div class="sk" data-accent="${s.accent}">
       <div class="sk-cat" style="color:${col}">${s.cat}</div>
-      <div class="sk-ic" style="color:${col}">${s.icon}</div>
+      <div class="sk-ic">${skLogos(s)}</div>
       <div class="sk-nm">${s.nm}</div>
       <div class="sk-ds">${s.ds}</div>
     </div>`;
@@ -135,7 +138,7 @@ document.getElementById("skGridMini").innerHTML = tools.map((s) => {
   const col = accentColors[s.accent];
   return `
     <div class="sk mini" data-accent="${s.accent}">
-      <div class="sk-ic" style="color:${col}">${s.icon}</div>
+      <div class="sk-ic">${skLogos(s)}</div>
       <div class="sk-mini-tx">
         <div class="sk-nm">${s.nm}</div>
         <div class="sk-mini-cat" style="color:${col}">${s.cat}</div>
