@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Askhabur Royyan — Web Developer Laravel</title>
   <meta name="description" content="Portofolio Askhabur Royyan, web developer Laravel dari Tuban. Membangun sistem informasi untuk yayasan, kampus, dan organisasi.">
-  <link rel="stylesheet" href="style.css?v=23">
+  <link rel="stylesheet" href="style.css?v=24">
 </head>
 <body>
   <!-- LOADER -->
@@ -205,6 +205,37 @@
     </footer>
   </div>
 
+  <!-- POPUP DETAIL PROYEK -->
+  <dialog class="pd" id="pdModal" aria-labelledby="pdTitle">
+    <div class="pd-box">
+      <button class="pd-close" id="pdClose" aria-label="Tutup detail">✕</button>
+      <div class="pd-gallery" id="pdGallery">
+        <div class="pd-stage">
+          <span class="pj-empty">SCREENSHOT MENYUSUL</span>
+          <img id="pdImg" alt="">
+          <button class="pd-nav prev" id="pdPrev" aria-label="Screenshot sebelumnya">←</button>
+          <button class="pd-nav next" id="pdNext" aria-label="Screenshot berikutnya">→</button>
+          <span class="pd-count" id="pdCount"></span>
+        </div>
+        <div class="pd-thumbs" id="pdThumbs"></div>
+      </div>
+      <div class="pd-info">
+        <div class="pd-top"><span class="pd-cat" id="pdCat"></span><span id="pdStatus"></span></div>
+        <h3 class="pd-title" id="pdTitle"></h3>
+        <p class="pd-org" id="pdOrg"></p>
+        <p class="pd-desc" id="pdDesc"></p>
+        <div id="pdFeatWrap">
+          <p class="pd-h">FITUR UTAMA</p>
+          <ul class="pd-feat" id="pdFeat"></ul>
+        </div>
+        <p class="pd-h">TEKNOLOGI</p>
+        <div class="pd-tech" id="pdTech"></div>
+        <a class="pd-live" id="pdLive" href="#" target="_blank" rel="noopener">KUNJUNGI WEBSITE <span id="pdLiveHost"></span> ↗</a>
+        <p class="pd-note" id="pdNote">Proyek ini belum online, jadi belum ada link website.</p>
+      </div>
+    </div>
+  </dialog>
+
   <!-- MENU BAWAH (khusus HP) -->
   <div class="m-tab" role="navigation" aria-label="Navigasi">
     <a onclick="go('hero')" data-sec="hero"><span>⌂</span>Home</a>
@@ -214,6 +245,6 @@
     <a onclick="go('contact')" data-sec="contact"><span>✉</span>Contact</a>
   </div>
 
-  <script src="main.js?v=21"></script>
+  <script src="main.js?v=24"></script>
 </body>
 </html>

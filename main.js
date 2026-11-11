@@ -129,6 +129,15 @@ const projects = [
     d: "Web profil BEM sekaligus portal administrasi: pengajuan dan pelacakan surat UKM sampai kemahasiswaan, arsip, program kerja, aspirasi mahasiswa dengan nomor tiket, akun per kementerian dengan hak akses berbeda, dan notifikasi Web Push.",
     tags: ["LARAVEL", "MySQL", "WEB PUSH", "CPANEL"],
     cat: "WEB PORTAL", link: "https://bemitbtuban.com",
+    logos: ["laravel", "mysql", "cpanel"],
+    features: [
+      "Halaman profil: kabinet, program kerja, berita, pengumuman, dan transparansi",
+      "Sampaikan aspirasi dengan nomor tiket dan halaman cek status tiket",
+      "Pengajuan dan pelacakan surat UKM sampai ke kemahasiswaan",
+      "Akun terpisah per kementerian dengan hak akses berbeda",
+      "Ruang Update Mahasiswa: info akademik, beasiswa, lomba, dan pelatihan",
+      "Tanda tangan dokumen PDF dan notifikasi Web Push ke HP pengurus",
+    ],
     imgs: ["projects/bem-1.jpg", "projects/bem-2.jpg", "projects/bem-3.jpg"],
   },
   {
@@ -136,6 +145,14 @@ const projects = [
     d: "Website Dompet Sosial Al-Uswah Tuban, dibangun ulang dari WordPress ke Laravel dengan panel admin untuk mengelola program, kegiatan, artikel, buletin, dan struktur pengurus, plus kalkulator zakat.",
     tags: ["LARAVEL", "TAILWIND", "MySQL", "BREEZE"],
     cat: "WEBSITE YAYASAN", link: "https://dsu.or.id",
+    logos: ["laravel", "tailwindcss", "mysql", "cpanel"],
+    features: [
+      "Panel admin untuk program, kegiatan, artikel, banner, rekening donasi, legalitas, dan pengurus",
+      "Buletin: admin mengunggah PDF dan sampul tiap edisi",
+      "Struktur organisasi dengan tab per divisi dan kartu foto pengurus",
+      "Kalkulator zakat untuk pengunjung",
+      "Optimasi SEO dan deploy ke hosting cPanel di domain dsu.or.id",
+    ],
     imgs: ["projects/dsu-1.jpg", "projects/dsu-2.jpg", "projects/dsu-3.jpg"],
   },
   {
@@ -143,6 +160,15 @@ const projects = [
     d: "Sistem operasional kafe: pelanggan memesan dengan scan QR di meja, pembayaran dikonfirmasi kasir, lalu pesanan diteruskan ke dapur. Resep tiap menu memotong stok bahan baku otomatis dan menghitung HPP serta margin. Akun terpisah untuk owner, kasir, dan dapur.",
     tags: ["LARAVEL", "TAILWIND", "MySQL"],
     cat: "SISTEM KAFE · ERP", link: "",
+    logos: ["laravel", "tailwindcss", "mysql"],
+    features: [
+      "Pelanggan memesan dengan scan QR Code yang ada di tiap meja",
+      "Alur bayar dulu: dikonfirmasi kasir, baru diteruskan ke dapur/bar",
+      "Menu & resep dengan perhitungan HPP dan margin otomatis",
+      "Stok bahan baku berkurang otomatis sesuai resep, lengkap dengan riwayat mutasi",
+      "Akun terpisah untuk owner, kasir, dan dapur",
+      "Dashboard omzet harian dan laporan penjualan",
+    ],
     imgs: ["projects/latarkopi-1.jpg", "projects/latarkopi-2.jpg", "projects/latarkopi-3.jpg"],
   },
   {
@@ -150,6 +176,14 @@ const projects = [
     d: "Sistem pembayaran kampus: admin membuat tagihan per jenis pembayaran dan tahun akademik, mengatur potongan dan cicilan, memverifikasi bukti transfer, lalu mengekspor laporan rekap dan tunggakan ke Excel atau PDF. Mahasiswa masuk dengan NIM untuk melihat tagihannya.",
     tags: ["LARAVEL", "LIVEWIRE", "MySQL"],
     cat: "SISTEM PEMBAYARAN", link: "",
+    logos: ["laravel", "mysql"],
+    features: [
+      "Tagihan per jenis pembayaran dan tahun akademik",
+      "Pengaturan potongan dan pembayaran cicilan",
+      "Verifikasi bukti transfer dan pengelolaan rekening bank",
+      "Laporan rekap pembayaran dan tunggakan, ekspor ke Excel dan PDF",
+      "Mahasiswa masuk dengan NIM untuk melihat tagihannya",
+    ],
     imgs: ["projects/pembayaran-1.jpg", "projects/pembayaran-2.jpg", "projects/pembayaran-3.jpg"],
   },
   {
@@ -157,6 +191,14 @@ const projects = [
     d: "Platform pengelolaan UKM kampus: data UKM, pendaftaran anggota, kegiatan dan absensi, proposal, SK, prestasi, serta anggaran. Lima peran dengan dashboard masing-masing: admin, pengurus, sekretariat, bendahara, dan mahasiswa.",
     tags: ["LARAVEL", "MySQL", "MULTI-ROLE"],
     cat: "SISTEM INFORMASI", link: "",
+    logos: ["laravel", "mysql"],
+    features: [
+      "Data UKM dan pendaftaran anggota per periode",
+      "Kegiatan UKM lengkap dengan absensi",
+      "Pengajuan proposal dan penerbitan SK",
+      "Pencatatan prestasi dan pengelolaan anggaran",
+      "Lima peran dengan dashboard sendiri: admin, pengurus, sekretariat, bendahara, mahasiswa",
+    ],
     imgs: ["projects/simukm-1.jpg"],
   },
   {
@@ -164,6 +206,14 @@ const projects = [
     d: "Website UKM Kewirausahaan ITB Tuban: katalog produk mahasiswa, profil usaha anggota, cek pesanan, agenda dengan pendaftaran online, galeri, testimoni, pendaftaran anggota, dan portal khusus anggota. Disiapkan untuk dikelola sendiri oleh admin UKM.",
     tags: ["LARAVEL", "MySQL"],
     cat: "WEBSITE UKM", link: "",
+    logos: ["laravel", "mysql"],
+    features: [
+      "Katalog produk mahasiswa dengan pencarian per kategori",
+      "Profil usaha anggota (Family) dan kirim pesan ke penjual",
+      "Cek status pesanan dan testimoni pembeli",
+      "Agenda kegiatan dengan pendaftaran online",
+      "Galeri, pendaftaran anggota, dan portal khusus anggota",
+    ],
     imgs: ["projects/ukmkwu-1.jpg"],
   },
 ];
@@ -172,11 +222,8 @@ const projects = [
 const pjHost = (u) => { try { return new URL(u).host.replace(/^www\./, ""); } catch (e) { return ""; } };
 const pjStatus = { LIVE: ["LIVE", ""], DEV: ["DALAM PENGEMBANGAN", " dev"] };
 
-document.getElementById("pjGrid").innerHTML = projects.map((pj) => {
-  const tag = pj.link ? `a href="${pj.link}" target="_blank" rel="noopener"` : "div";
-  const end = pj.link ? "a" : "div";
-  return `
-  <${tag} class="pj${pj.link ? " has-link" : ""}">
+document.getElementById("pjGrid").innerHTML = projects.map((pj, idx) => `
+  <div class="pj" role="button" tabindex="0" data-idx="${idx}" aria-label="Lihat detail ${pj.t}">
     <div class="pj-img">
       <span class="pj-empty">SCREENSHOT MENYUSUL</span>
       ${pj.imgs.map((src, i) => `<img src="${src}" alt="Screenshot ${pj.t}" loading="lazy"${i === 0 ? ' class="on"' : ""} onerror="this.remove()">`).join("")}
@@ -185,7 +232,7 @@ document.getElementById("pjGrid").innerHTML = projects.map((pj) => {
     </div>
     <div class="pj-bar">
       <div><span class="pj-cat">${pj.cat}</span><span class="pj-t">${pj.t}</span></div>
-      <span class="pj-arr">${pj.link ? "↗" : pj.n}</span>
+      <span class="pj-more">LIHAT DETAIL</span>
     </div>
     <div class="pj-body">
       <p class="pj-d">${pj.d}</p>
@@ -194,8 +241,7 @@ document.getElementById("pjGrid").innerHTML = projects.map((pj) => {
         ${pj.tags.length ? `<span class="pj-tags">${pj.tags.join(" · ")}</span>` : ""}
       </div>
     </div>
-  </${end}>`;
-}).join("");
+  </div>`).join("");
 
 const live = projects.filter((p) => p.status === "LIVE").length;
 document.getElementById("factProjects").textContent = `${projects.length} proyek, ${live} sudah live`;
@@ -256,3 +302,86 @@ const navObs = new IntersectionObserver((entries) => {
   });
 }, { rootMargin: "-45% 0px -50% 0px" });
 Object.keys(navMap).forEach((id) => { const el = document.getElementById(id); if (el) navObs.observe(el); });
+
+// =============================================
+// POPUP DETAIL PROYEK
+// Tutup: tombol ✕, klik di luar, Esc, atau tombol Back di HP
+// =============================================
+const pdModal = document.getElementById("pdModal");
+const pd = (id) => document.getElementById(id);
+let pdIdx = 0, pdImg = 0, pdFromHistory = false;
+
+function pdShowImg(i) {
+  const pj = projects[pdIdx];
+  if (!pj.imgs.length) return;
+  pdImg = (i + pj.imgs.length) % pj.imgs.length;
+  pd("pdImg").src = pj.imgs[pdImg];
+  pd("pdImg").alt = `Screenshot ${pj.t} ${pdImg + 1}`;
+  pd("pdThumbs").querySelectorAll("button").forEach((b, k) => b.classList.toggle("on", k === pdImg));
+  pd("pdCount").textContent = `${pdImg + 1} / ${pj.imgs.length}`;
+}
+
+function pdOpen(idx) {
+  pdIdx = idx;
+  const pj = projects[idx];
+  const st = pjStatus[pj.status];
+  pd("pdCat").textContent = pj.cat;
+  pd("pdTitle").textContent = pj.t;
+  pd("pdStatus").innerHTML = st ? `<span class="pj-badge${st[1]}">${st[0]}</span>` : "";
+  pd("pdOrg").textContent = pj.org;
+  pd("pdDesc").textContent = pj.d;
+  pd("pdFeat").innerHTML = (pj.features || []).map((f) => `<li>${f}</li>`).join("");
+  pd("pdFeatWrap").hidden = !(pj.features || []).length;
+  pd("pdTech").innerHTML = (pj.logos || []).map((l) => `<span><img src="icons/${l}.svg" alt="">${l === "tailwindcss" ? "Tailwind" : l === "cpanel" ? "cPanel" : l === "mysql" ? "MySQL" : l.charAt(0).toUpperCase() + l.slice(1)}</span>`).join("")
+    + pj.tags.filter((t) => !["LARAVEL", "MySQL", "TAILWIND", "CPANEL"].includes(t)).map((t) => `<span class="txt">${t}</span>`).join("");
+  const live = pd("pdLive");
+  if (pj.link) { live.href = pj.link; live.hidden = false; pd("pdLiveHost").textContent = pjHost(pj.link); }
+  else live.hidden = true;
+  pd("pdNote").hidden = !!pj.link;
+  pd("pdThumbs").innerHTML = pj.imgs.map((src, i) => `<button aria-label="Screenshot ${i + 1}"><img src="${src}" alt=""></button>`).join("");
+  pd("pdThumbs").querySelectorAll("button").forEach((b, i) => b.addEventListener("click", () => pdShowImg(i)));
+  pd("pdGallery").classList.toggle("empty", !pj.imgs.length);
+  pd("pdGallery").classList.toggle("single", pj.imgs.length < 2);
+  if (pj.imgs.length) pdShowImg(0); else pd("pdImg").removeAttribute("src");
+  pdModal.showModal();
+  pdModal.scrollTop = 0;
+  document.body.classList.add("pd-lock");
+  history.pushState({ pd: true }, "");
+}
+
+function pdClose() {
+  if (!pdModal.open) return;
+  pdModal.close();
+  document.body.classList.remove("pd-lock");
+  if (!pdFromHistory && history.state && history.state.pd) history.back();
+  pdFromHistory = false;
+}
+
+document.getElementById("pjGrid").addEventListener("click", (e) => {
+  const card = e.target.closest(".pj");
+  if (card) pdOpen(+card.dataset.idx);
+});
+document.getElementById("pjGrid").addEventListener("keydown", (e) => {
+  const card = e.target.closest(".pj");
+  if (card && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); pdOpen(+card.dataset.idx); }
+});
+pd("pdClose").addEventListener("click", pdClose);
+pd("pdPrev").addEventListener("click", () => pdShowImg(pdImg - 1));
+pd("pdNext").addEventListener("click", () => pdShowImg(pdImg + 1));
+pdModal.addEventListener("click", (e) => { if (e.target === pdModal) pdClose(); });
+pdModal.addEventListener("cancel", (e) => { e.preventDefault(); pdClose(); });
+pdModal.addEventListener("keydown", (e) => {
+  if (e.key === "ArrowLeft") pdShowImg(pdImg - 1);
+  if (e.key === "ArrowRight") pdShowImg(pdImg + 1);
+});
+window.addEventListener("popstate", () => { if (pdModal.open) { pdFromHistory = true; pdClose(); } });
+
+// geser (swipe) galeri di HP
+let pdTouchX = null;
+pd("pdGallery").addEventListener("touchstart", (e) => { pdTouchX = e.touches[0].clientX; }, { passive: true });
+pd("pdGallery").addEventListener("touchend", (e) => {
+  if (pdTouchX === null) return;
+  const dx = e.changedTouches[0].clientX - pdTouchX;
+  if (Math.abs(dx) > 40) pdShowImg(pdImg + (dx < 0 ? 1 : -1));
+  pdTouchX = null;
+});
