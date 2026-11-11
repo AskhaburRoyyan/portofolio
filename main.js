@@ -419,7 +419,10 @@ let pdIdx = 0, pdImg = 0, pdFromHistory = false;
 function pdShowImg(i) {
   const pj = projects[pdIdx];
   if (!pj.imgs.length) return;
-  pdImg = (i + pj.imgs.length) % pj.imgs.length;
+  // berhenti di ujung (tidak berputar)
+  pdImg = Math.max(0, Math.min(pj.imgs.length - 1, i));
+  pd("pdPrev").disabled = pdImg === 0;
+  pd("pdNext").disabled = pdImg === pj.imgs.length - 1;
   pd("pdImg").src = pj.imgs[pdImg];
   pd("pdImg").alt = `Screenshot ${pj.t} ${pdImg + 1}`;
   pd("pdThumbs").querySelectorAll("button").forEach((b, k) => b.classList.toggle("on", k === pdImg));
@@ -442,6 +445,7 @@ function pdOpen(idx) {
   const live = pd("pdLive");
   if (pj.link) { live.href = pj.link; live.hidden = false; pd("pdLiveHost").textContent = pjHost(pj.link); }
   else live.hidden = true;
+  pd("pdUrl").textContent = pj.link ? pjHost(pj.link) : "localhost · dalam pengembangan";
   pd("pdNote").hidden = !!pj.link;
   pd("pdThumbs").innerHTML = pj.imgs.map((src, i) => `<button aria-label="Screenshot ${i + 1}"><img src="${src}" alt=""></button>`).join("");
   pd("pdThumbs").querySelectorAll("button").forEach((b, i) => b.addEventListener("click", () => pdShowImg(i)));
