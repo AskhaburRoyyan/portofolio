@@ -470,7 +470,6 @@ footer p { font-size: 0.78rem; color: var(--ink-soft); }
 
   /* PERFORMA HP — efek berat dimatikan */
   nav { backdrop-filter: none; -webkit-backdrop-filter: none; background: rgba(255,255,255,0.96); }
-  .h-stamp-ring { animation: none; }
 }
 
 @media (max-width: 380px) {
@@ -720,3 +719,10 @@ body.pd-lock { overflow: hidden; }
   #photoCard { height: clamp(210px, 34svh, 380px); }
   .h-logo { display: block; position: absolute; left: 0; top: 0.6rem; height: 40px; width: auto; z-index: 3; }
 }
+
+/* =============================================
+   STEMPEL — berputar juga di HP, berhenti saat tidak terlihat
+   ============================================= */
+.h-stamp-ring { will-change: transform; }
+.h-stamp.paused .h-stamp-ring { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) { .h-stamp-ring { animation: none; } }

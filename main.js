@@ -385,3 +385,13 @@ pd("pdGallery").addEventListener("touchend", (e) => {
   if (Math.abs(dx) > 40) pdShowImg(pdImg + (dx < 0 ? 1 : -1));
   pdTouchX = null;
 });
+
+// =============================================
+// STEMPEL — putaran berhenti saat stempel tidak terlihat di layar
+// =============================================
+const stampEl = document.querySelector(".h-stamp");
+if (stampEl) {
+  new IntersectionObserver((entries) => {
+    entries.forEach((e) => stampEl.classList.toggle("paused", !e.isIntersecting));
+  }).observe(stampEl);
+}
