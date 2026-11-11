@@ -710,16 +710,13 @@ body.pd-lock { overflow: hidden; }
 }
 
 /* =============================================
-   NAVBAR HP — logo di atas nama, di tengah
+   NAVBAR HP — versi sebelumnya (nama di lekukan), logo pindah ke hero
    ============================================= */
+.h-logo { display: none; }
 @media (max-width: 768px) {
-  .nav-shell nav {
-    height: 66px; padding: 0; justify-content: center;
-    clip-path: polygon(0% 0%, 100% 0%, 100% 52%, 68% 52%, 63% 100%, 37% 100%, 32% 52%, 0% 52%);
-  }
-  .nav-shell .nav-logo-wrap { position: absolute; left: 50%; top: 4px; transform: translateX(-50%); display: flex; }
-  .nav-shell .nav-logo-img { height: 30px; }
-  .nav-shell .nav-center-title { bottom: 6px; font-size: 0.62rem; letter-spacing: 0.14em; }
-  #hero { padding-top: 4.6rem; }
-  #photoCard { height: clamp(210px, 30svh, 360px); }
+  .nav-shell .nav-logo-wrap { display: none; }
+  .nav-shell .nav-center-title { display: block; }
+  #hero { padding-top: 3.4rem; }
+  #photoCard { height: clamp(210px, 34svh, 380px); }
+  .h-logo { display: block; position: absolute; left: 0; top: 0.6rem; height: 40px; width: auto; z-index: 3; }
 }
