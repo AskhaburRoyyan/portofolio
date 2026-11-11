@@ -243,3 +243,16 @@ pjGridEl.addEventListener("scroll", () => {
   const i = Math.round(pjGridEl.scrollLeft / pjStep());
   pjDotBtns.forEach((b, k) => b.classList.toggle("on", k === i));
 }, { passive: true });
+
+// =============================================
+// NAVBAR — tandai menu section yang sedang dilihat (kuning)
+// =============================================
+const navMap = { hero: "go('hero')", about: "go('about')", skills: "go('skills')", work: "go('work')", contact: "go('contact')" };
+const navLinks = document.querySelectorAll(".navl a");
+const navObs = new IntersectionObserver((entries) => {
+  entries.forEach((e) => {
+    if (!e.isIntersecting) return;
+    navLinks.forEach((a) => a.classList.toggle("on", a.getAttribute("onclick") === navMap[e.target.id]));
+  });
+}, { rootMargin: "-45% 0px -50% 0px" });
+Object.keys(navMap).forEach((id) => { const el = document.getElementById(id); if (el) navObs.observe(el); });
