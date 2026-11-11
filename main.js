@@ -220,8 +220,16 @@ document.getElementById("pjGrid").innerHTML = projects.map((pj) => `
   </${pj.link ? "a" : "div"}>`).join("");
 
 // Screenshot berganti otomatis tiap 3,5 detik
+// Hanya gambar yang sedang terlihat di layar yang berganti (hemat baterai/prosesor HP)
+const pjVisible = new Set();
+const pjImgObs = new IntersectionObserver((entries) => {
+  entries.forEach((e) => (e.isIntersecting ? pjVisible.add(e.target) : pjVisible.delete(e.target)));
+});
+document.querySelectorAll(".pj-img").forEach((box) => pjImgObs.observe(box));
+
 setInterval(() => {
-  document.querySelectorAll(".pj-img").forEach((box) => {
+  if (document.hidden) return;
+  pjVisible.forEach((box) => {
     const imgs = [...box.querySelectorAll("img")];
     if (imgs.length < 2) return;
     const i = imgs.findIndex((im) => im.classList.contains("on"));

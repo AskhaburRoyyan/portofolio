@@ -980,3 +980,29 @@ footer p { font-size: 0.8rem; letter-spacing: 0.06em; }
   .sk-ic img { height: 32px; }
   .sk.mini .sk-ic img { height: 22px; }
 }
+
+/* =============================================
+   PERFORMA HP — efek berat dimatikan (≤ 768px)
+   Di laptop/desktop semua efek tetap berjalan.
+   ============================================= */
+@media (max-width: 768px) {
+  /* latar tidak lagi "fixed" → tidak digambar ulang tiap scroll */
+  html, body { background-attachment: scroll; }
+
+  /* efek blur kaca diganti latar semi-transparan biasa */
+  nav { backdrop-filter: none; -webkit-backdrop-filter: none; background: rgba(255,255,255,0.96); }
+  .m-tab { backdrop-filter: none; -webkit-backdrop-filter: none; background: rgba(255,255,255,0.97); }
+  .abt-badge { backdrop-filter: none; -webkit-backdrop-filter: none; background: rgba(255,255,255,0.96); }
+  .ct-box { backdrop-filter: none; -webkit-backdrop-filter: none; background: rgba(255,255,255,0.97); }
+  .pj-ind { backdrop-filter: none; -webkit-backdrop-filter: none; background: rgba(28,33,64,0.6); }
+
+  /* blur besar di belakang foto hero tidak dipakai */
+  .photo-ring { display: none; filter: none; }
+
+  /* animasi yang berjalan terus dihentikan */
+  .ct-orbit { display: none; animation: none; }
+  .ct-email { animation: none; background-position: 0 0; }
+  .ct-btn { animation: none; }
+  .ct-dot { animation: none; }
+  .sc-line { animation: none; }
+}
