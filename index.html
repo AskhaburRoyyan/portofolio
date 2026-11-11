@@ -90,6 +90,32 @@
       </div>
     </section>
 
+    <!-- ABOUT -->
+    <section class="sec" id="about">
+      <div class="abt-grid">
+        <div class="abt-text">
+          <p class="eyb">ABOUT ME</p>
+          <h2 class="abt-title">WHO <span>AM I</span></h2>
+          <p class="abt-p">Mahasiswa S1 Sistem Informasi di Institut Teknologi dan Bisnis Tuban yang membangun aplikasi <b>web</b>, <b>mobile</b>, dan <b>desktop</b>. Untuk web, saya mengandalkan <b>Laravel</b>, <b>CodeIgniter</b>, dan <b>JavaScript</b>, mulai dari panel admin, pengelolaan data, sampai deploy ke hosting.</p>
+          <p class="abt-p">Saya terbiasa memakai <b>workflow dan tools modern</b> untuk mempercepat eksplorasi, debugging, dan proses development, tanpa mengurangi kendali atas solusi yang saya bangun.</p>
+          <p class="abt-quote">Build fast. Solve problems. Ship things.</p>
+        </div>
+
+        <div class="abt-photo">
+          <div class="abt-photo-block"></div>
+          <img src="Roy.jpeg" alt="Askhabur Royyan" loading="lazy">
+        </div>
+
+        <div class="abt-facts">
+          <div class="abt-fact"><span>PENDIDIKAN</span><b>S1 Sistem Informasi, ITB Tuban</b></div>
+          <div class="abt-fact"><span>FOKUS</span><b>Web · Android · Desktop</b></div>
+          <div class="abt-fact"><span>PROYEK</span><b id="factProjects">6 proyek, 2 sudah live</b></div>
+          <div class="abt-fact"><span>LOKASI</span><b>Tuban, Jawa Timur</b></div>
+          <button class="btn-line" onclick="go('contact')">HUBUNGI SAYA <i>↓</i></button>
+        </div>
+      </div>
+    </section>
+
     <!-- SELECTED WORK -->
     <section class="sec" id="work">
       <div class="sec-row">
@@ -125,32 +151,6 @@
             <span class="sv-ic"><svg viewBox="0 0 24 24"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg></span>
             <div><h3>APLIKASI DESKTOP</h3><p>Aplikasi desktop dengan Java di NetBeans untuk kebutuhan operasional offline.</p></div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ABOUT -->
-    <section class="sec" id="about">
-      <div class="abt-grid">
-        <div class="abt-text">
-          <p class="eyb">ABOUT ME</p>
-          <h2 class="abt-title">WHO <span>AM I</span></h2>
-          <p class="abt-p">Mahasiswa S1 Sistem Informasi di Institut Teknologi dan Bisnis Tuban yang membangun aplikasi <b>web</b>, <b>mobile</b>, dan <b>desktop</b>. Untuk web, saya mengandalkan <b>Laravel</b>, <b>CodeIgniter</b>, dan <b>JavaScript</b>, mulai dari panel admin, pengelolaan data, sampai deploy ke hosting.</p>
-          <p class="abt-p">Saya terbiasa memakai <b>workflow dan tools modern</b> untuk mempercepat eksplorasi, debugging, dan proses development, tanpa mengurangi kendali atas solusi yang saya bangun.</p>
-          <p class="abt-quote">Build fast. Solve problems. Ship things.</p>
-        </div>
-
-        <div class="abt-photo">
-          <div class="abt-photo-block"></div>
-          <img src="Roy.jpeg" alt="Askhabur Royyan" loading="lazy">
-        </div>
-
-        <div class="abt-facts">
-          <div class="abt-fact"><span>PENDIDIKAN</span><b>S1 Sistem Informasi, ITB Tuban</b></div>
-          <div class="abt-fact"><span>FOKUS</span><b>Web · Android · Desktop</b></div>
-          <div class="abt-fact"><span>PROYEK</span><b id="factProjects">6 proyek, 2 sudah live</b></div>
-          <div class="abt-fact"><span>LOKASI</span><b>Tuban, Jawa Timur</b></div>
-          <button class="btn-line" onclick="go('contact')">HUBUNGI SAYA <i>↓</i></button>
         </div>
       </div>
     </section>
@@ -240,8 +240,8 @@
   <!-- MENU BAWAH (khusus HP) -->
   <div class="m-tab" role="navigation" aria-label="Navigasi">
     <a onclick="go('hero')" data-sec="hero"><span>⌂</span>Home</a>
-    <a onclick="go('work')" data-sec="work"><span>▣</span>Work</a>
     <a onclick="go('about')" data-sec="about"><span>◉</span>About</a>
+    <a onclick="go('work')" data-sec="work"><span>▣</span>Work</a>
     <a onclick="go('skills')" data-sec="skills"><span>◈</span>Stack</a>
     <a onclick="go('contact')" data-sec="contact"><span>✉</span>Contact</a>
   </div>
