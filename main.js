@@ -7,56 +7,162 @@ function go(id) {
 }
 
 // =============================================
-// LOADER
+// INTRO "MEMBANGUN PORTOFOLIO"
+// Kursor warna-warni menggambar kerangka biru tiap elemen hero,
+// lalu kerangka berubah jadi tampilan asli. Diputar sekali per sesi.
 // =============================================
-const msgs = ["INIT SYSTEMS...", "MOUNTING APP...", "READY ↗"];
-let p = 0, mi = 0;
-const fill = document.getElementById("ldFill");
-const pctEl = document.getElementById("ldPct");
-const msgEl = document.getElementById("ldMsg");
+const buildEl = document.getElementById("build");
+const buildSkip = document.getElementById("buildSkip");
+const buildPct = document.getElementById("buildPct");
+const buildMsg = document.getElementById("buildMsg");
+const isMobile = window.matchMedia("(max-width: 768px)").matches;
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+let buildDone = false;
+const buildTimers = [];
+const later = (ms, fn) => buildTimers.push(setTimeout(fn, ms));
 
-const ldI = setInterval(() => {
-  p += Math.random() * 5 + 3;
-  if (p > 100) p = 100;
-  fill.style.width = p + "%";
-  pctEl.textContent = Math.floor(p) + "%";
-  const idx = Math.floor((p / 100) * msgs.length);
-  if (idx > mi && mi < msgs.length - 1) {
-    mi = idx;
-    msgEl.textContent = msgs[mi];
-  }
-  if (p >= 100) {
-    clearInterval(ldI);
-    msgEl.textContent = msgs[msgs.length - 1];
-    setTimeout(() => {
-      document.getElementById("loader").classList.add("gone");
-      playHeroIntro();
-    }, 500);
-  }
-}, 60);
-
-// =============================================
-// HERO INTRO (jalan otomatis setelah loader)
-// =============================================
-function playHeroIntro() {
-  const spinner = document.getElementById("photoSpinner");
-  spinner.classList.add("do-spin");
-  spinner.addEventListener(
-    "animationend",
-    () => {
-      spinner.classList.remove("do-spin");
-      spinner.classList.add("spin-done");
-    },
-    { once: true }
-  );
-
-  const textEls = document.querySelectorAll(".hero-text > *");
-  const delays = [250, 850, 1550, 2550, 3300, 3950, 4650];
-  textEls.forEach((el, i) => {
-    const ms = delays[i] !== undefined ? delays[i] : 300 + i * 600;
-    setTimeout(() => el.classList.add("revealed"), ms);
-  });
+// tampilkan semua elemen hero (dipakai saat intro selesai/dilewati)
+function revealHero() {
+  document.querySelectorAll(".hero-text > *").forEach((el) => el.classList.add("revealed"));
+  document.getElementById("photoSpinner").classList.add("spin-done");
+  document.body.classList.add("built");
 }
+
+function finishBuild() {
+  if (buildDone) return;
+  buildDone = true;
+  buildTimers.forEach(clearTimeout);
+  revealHero();
+  buildEl.classList.add("done");
+  setTimeout(() => {
+    buildEl.remove();
+    document.body.classList.remove("intro-on");
+  }, 650);
+  try { sessionStorage.setItem("arBuilt", "1"); } catch (e) {}
+}
+
+function playBuild() {
+  const seen = (() => { try { return sessionStorage.getItem("arBuilt") === "1"; } catch (e) { return false; } })();
+  if (reduceMotion || seen || location.hash || window.scrollY > 40) {
+    buildEl.remove();
+    document.body.classList.remove("intro-on");
+    revealHero();
+    buildDone = true;
+    return;
+  }
+  window.scrollTo(0, 0);
+
+  // daftar kursor (nama + warna)
+  const people = [
+    { name: "Royyan", c: "#1a4bff", t: "#fff" },
+    { name: "Laravel", c: "#ff2d20", t: "#fff" },
+    { name: "UI", c: "#ffc72c", t: "#0d0f14" },
+    { name: "Mobile", c: "#00b37a", t: "#fff" },
+    { name: "Deploy", c: "#7b5cff", t: "#fff" },
+  ].slice(0, isMobile ? 3 : 5);
+
+  const cursors = people.map((p, i) => {
+    const el = document.createElement("div");
+    el.className = "bc";
+    el.style.setProperty("--c", p.c);
+    el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 2l7.5 19 2.6-7.9L21 10.5z" fill="${p.c}" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg><span style="background:${p.c};color:${p.t}">${p.name}</span>`;
+    // mulai dari luar layar, dari arah berbeda-beda
+    const sx = [-60, innerWidth + 40, innerWidth * 0.5, -60, innerWidth + 40][i];
+    const sy = [innerHeight * 0.3, innerHeight * 0.15, innerHeight + 40, innerHeight + 40, innerHeight * 0.8][i];
+    el.style.transform = `translate(${sx}px, ${sy}px)`;
+    buildEl.appendChild(el);
+    return el;
+  });
+  const moveCursor = (i, x, y, dur = 520) => {
+    const el = cursors[i % cursors.length];
+    el.style.transitionDuration = dur + "ms";
+    el.style.transform = `translate(${Math.round(x)}px, ${Math.round(y)}px)`;
+  };
+
+  // elemen hero yang "dibangun", berurutan
+  const targets = [
+    { sel: ".nav-shell nav", tag: "nav · navbar" },
+    { sel: ".h-tag", tag: "p · tag", reveal: ".h-tag" },
+    { sel: ".h-title", tag: "h1 · title", reveal: ".h-title" },
+    { sel: "#photoCard", tag: "img · photo", reveal: "photo" },
+    { sel: ".h-sub", tag: "p · subtitle", reveal: ".h-sub" },
+    { sel: ".h-stack", tag: "ul · stack", reveal: ".h-stack" },
+    { sel: ".h-cta", tag: "div · cta", reveal: ".h-cta" },
+    { sel: ".h-stamp", tag: "svg · badge", reveal: "stamp" },
+    { sel: ".h-side", tag: "aside · meta", reveal: "side" },
+  ];
+
+  const step = isMobile ? 300 : 360;      // jeda antar elemen
+  const draw = isMobile ? 420 : 480;      // lama menggambar kotak
+  const start = 650;                      // kursor masuk dulu
+  const total = targets.length;
+
+  // kursor masuk ke tengah layar
+  cursors.forEach((_, i) => later(80 + i * 70, () => moveCursor(i, innerWidth * (0.3 + 0.1 * i), innerHeight * (0.35 + 0.08 * (i % 3)), 600)));
+
+  targets.forEach((tg, i) => {
+    const el = document.querySelector(tg.sel);
+    if (!el) return;
+    let r = el.getBoundingClientRect();
+    if (r.width < 4 || r.height < 4 || r.top > innerHeight) return;
+    const t0 = start + i * step;
+    const ci = i % cursors.length;
+
+    // 1) kursor menuju pojok kiri atas elemen
+    later(t0, () => { r = el.getBoundingClientRect(); moveCursor(ci, r.left - 4, r.top - 4, 420); });
+
+    // 2) kotak kerangka ditarik dari pojok kiri atas ke kanan bawah
+    later(t0 + 420, () => {
+      const box = document.createElement("div");
+      box.className = "bb";
+      box.style.setProperty("--c", people[ci].c);
+      box.style.left = r.left + "px";
+      box.style.top = r.top + "px";
+      box.innerHTML = `<em style="background:${people[ci].c};color:${people[ci].t}">${tg.tag}</em><i class="bb-size">${Math.round(r.width)} × ${Math.round(r.height)}</i>`;
+      buildEl.appendChild(box);
+      requestAnimationFrame(() => {
+        box.style.transitionDuration = draw + "ms";
+        box.style.width = r.width + "px";
+        box.style.height = r.height + "px";
+      });
+      moveCursor(ci, r.right - 6, r.bottom - 6, draw);
+
+      // 3) isi asli muncul, kerangka memudar
+      later(draw + 140, () => {
+        if (tg.reveal === "photo") document.getElementById("photoSpinner").classList.add("spin-done");
+        else if (tg.reveal === "stamp" || tg.reveal === "side") document.body.classList.add("show-" + tg.reveal);
+        else if (tg.reveal) document.querySelector(tg.reveal).classList.add("revealed");
+        else document.body.classList.add("show-nav");
+        box.classList.add("fill");
+        later(520, () => box.classList.add("out"));
+      });
+    });
+
+    // progres
+    later(t0 + 420, () => {
+      const pct = Math.round(((i + 1) / total) * 100);
+      buildPct.textContent = pct + "%";
+      buildMsg.textContent = `building ${tg.tag.split(" · ")[1]}…`;
+    });
+  });
+
+  // kursor menyebar keluar layar, intro selesai
+  const end = start + (total - 1) * step + 420 + draw + 900;
+  later(end - 500, () => {
+    buildMsg.textContent = "deployed ✓";
+    cursors.forEach((_, i) => moveCursor(i, [-80, innerWidth + 60, innerWidth * 0.2, innerWidth + 60, innerWidth * 0.8][i], [-60, -60, innerHeight + 60, innerHeight * 0.6, innerHeight + 60][i], 700));
+  });
+  later(end, finishBuild);
+}
+
+buildSkip.addEventListener("click", finishBuild);
+document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !buildDone) finishBuild(); });
+
+// mulai setelah font siap (maks 1,2 detik menunggu) agar ukuran kotak tepat
+const heroImg = document.querySelector(".photo-img");
+const imgReady = heroImg && !heroImg.complete ? new Promise((r) => { heroImg.addEventListener("load", r, { once: true }); heroImg.addEventListener("error", r, { once: true }); }) : Promise.resolve();
+Promise.race([Promise.all([document.fonts ? document.fonts.ready : Promise.resolve(), imgReady]), new Promise((r) => setTimeout(r, 1800))])
+  .then(() => requestAnimationFrame(playBuild));
 
 // =============================================
 // PHOTO — tilt ringan mengikuti mouse

@@ -5,20 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Askhabur Royyan — Web Developer Laravel</title>
   <meta name="description" content="Portofolio Askhabur Royyan, web developer Laravel dari Tuban. Membangun sistem informasi untuk yayasan, kampus, dan organisasi.">
-  <link rel="stylesheet" href="style.css?v=26">
+  <link rel="stylesheet" href="style.css?v=28">
 </head>
-<body>
-  <!-- LOADER -->
-  <div id="loader">
-    <div class="ld-inner">
-      <div class="ld-logo" data-text="AR.DEV">AR.DEV</div>
-      <div class="ld-role">WEB DEVELOPER</div>
-      <div class="ld-track"><div class="ld-fill" id="ldFill"></div></div>
-      <div class="ld-info">
-        <span class="ld-pct" id="ldPct">0%</span>
-        <span class="ld-msg" id="ldMsg">INIT...</span>
-      </div>
+<body class="intro-on">
+  <!-- INTRO: kursor membangun portofolio -->
+  <div id="build" aria-hidden="true">
+    <div class="build-hud">
+      <span class="build-brand">AR.DEV</span>
+      <span class="build-line">BUILDING PORTFOLIO <b id="buildPct">0%</b></span>
+      <span class="build-msg" id="buildMsg">menyiapkan workspace…</span>
     </div>
+    <button class="build-skip" id="buildSkip" type="button">LEWATI INTRO →</button>
   </div>
 
   <!-- MAIN CONTENT -->
@@ -246,6 +243,6 @@
     <a onclick="go('contact')" data-sec="contact"><span>✉</span>Contact</a>
   </div>
 
-  <script src="main.js?v=26"></script>
+  <script src="main.js?v=28"></script>
 </body>
 </html>
